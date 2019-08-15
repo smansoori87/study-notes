@@ -74,7 +74,8 @@ Files in git repo[config server]
 //currency-exchange-rate-service-qa.properties
 //currency-exchange-rate-service.properties
 
-Ex: 
+Ex:
+```java 
 @Component
 @ConfigurationProperties(prefix="limit-service")
 public class LimitConfiguration {
@@ -84,6 +85,7 @@ public class LimitConfiguration {
 	
 	//Setters, Getters, Constructor
 }
+```java
 
 spring.application.name=limit-service
 limit-service.minimum=99
@@ -93,13 +95,15 @@ Other way to read is:
 @RefreshScope
 
 Use full property name in place holder to read from config server.
+```java 
 @Component
 @RefreshScope
 public class LimitConfiguration {
 
 	@Value("${limit-service.minimum}")
 	private int minimum;
-	
+}
+```	
 ----------------------------------------------------------------------------------------------------	
 --------------------------------------connect with Git Config Repository--------------------------------------------------
 
@@ -118,12 +122,12 @@ How to connect with Git Config Repository.
 
 [imp] https://dzone.com/articles/introduction-to-jpa-using-spring-boot-data-jpa
 https://www.petrikainulainen.net/programming/spring-framework/spring-data-jpa-tutorial-introduction/
-
+```xml
 <dependency>
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-starter-data-jpa</artifactId>
 </dependency>
-
+```
 Internally it will take care of Hibernet-Core, Hikari CP, SpringJdbc, Spring Tx, Spring JPA and others.
 
 >Spring JPA is part of Spring Data project and built on top of Spring Data Common. 
@@ -176,7 +180,7 @@ findBy is an standard prefix from JPA where we can add the conditions based on c
 ---------------------------------------RestTemplate:-------------------------------------------------
 
 Use to make the Server to Rest call.
-
+```java 
 @RestController
 public class CurrencyConversionController {
 
@@ -199,6 +203,7 @@ public class CurrencyConversionController {
 				Integer.valueOf(env.getProperty("local.server.port")));
 	}
 }
+```
 ----------------------------------------------------------------------------------------
 ------------------------------------Spring Feign:---------------------------------------------------
 
@@ -206,13 +211,14 @@ public class CurrencyConversionController {
 -Also its provide the important component called Ribbon that is client side load balancer.
 
 -Add below dependency in pom.xml
-
+```xml
 <dependency>
 	<groupId>org.springframework.cloud</groupId>
 	<artifactId>spring-cloud-starter-openfeign</artifactId>
 </dependency>
-
+```
 > Use below annotation to mark your application to read the feign class paths.
+```java 
 @SpringBootApplication
 @EnableFeignClients("com.cs.feign")
 public class CurrencyConversionServiceApplication {
@@ -221,16 +227,18 @@ public class CurrencyConversionServiceApplication {
 		SpringApplication.run(CurrencyConversionServiceApplication.class, args);
 	}
 }
-
+```
 >To read other microservice data use below annotations.
+```java 
 @FeignClient(name = "currency-exchange-rate-service", url = "localhost:8000")
 public interface ExchangeRateControllerProxy {
 
 	@GetMapping("/exchange-rate/api/v1/from/{from}/to/{to}")
 	public CurrencyConverterBean currencyExchange(@PathVariable String from, @PathVariable String to);
 }
-
+```
 >How to use the same.
+```java 
 @GetMapping("/currency-conversion-feign/api/v1/from/{from}/to/{to}/quantity/{quantity}")
 public CurrencyConverterBean currencyConverterFeign(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity) {
 
@@ -239,7 +247,7 @@ public CurrencyConverterBean currencyConverterFeign(@PathVariable String from, @
 	return new CurrencyConverterBean(ccb.getId(), from, to, ccb.getConversionMultiple(), quantity, ccb.getConversionMultiple().multiply(quantity),
 			Integer.valueOf(env.getProperty("local.server.port")));
 }
-
+```
 ----------------------------------------------------------------------------------------
 --------------------------------------Spring Ribbon:--------------------------------------------------
 
@@ -250,14 +258,15 @@ To Overcome the same problem Ribbon have client side load balancing concept and 
 of same microservice in property file.
 
 Dependency needs to be added in pom.xml
-
+```xml
 <dependency>
 	<groupId>org.springframework.cloud</groupId>
 	<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
 </dependency>
-
+```
 Create Proxy class as below:
 ----------------
+```java 
 @FeignClient(name = "currency-exchange-rate-service")
 @RibbonClient(name="currency-exchange-rate-service")
 public interface ExchangeRateControllerProxy {
@@ -266,7 +275,7 @@ public interface ExchangeRateControllerProxy {
 	public CurrencyConverterBean curr
 	encyExchange(@PathVariable("from") String from, @PathVariable("to") String to);
 }
-
+```
 Make the below changes in bootstrap.properties file
 -----------------
 currency-exchange-rate-service.ribbon.listOfServers=localhost:8000,localhost:8001
@@ -290,6 +299,7 @@ Add Below dependency into pom.xml
 
 Add below annotation to enable Eureka server n your main class.
 *******************
+```java 
 @SpringBootApplication
 @EnableEurekaServer
 public class NetflixEurekaNamingServerApplication {
@@ -298,7 +308,7 @@ public class NetflixEurekaNamingServerApplication {
 		SpringApplication.run(NetflixEurekaNamingServerApplication.class, args);
 	}
 }
-
+```
 Add below configuration into properties file to test the server first time.
 *******************
 spring.application.name=netfix-eureka-naming-server
@@ -318,6 +328,7 @@ Add Below dependency into client to register it with eureka.[Eureka Discovery]
 
 Add "@EnableDiscoveryClient" to enable the nameserver discovery.
 ********************************
+```java 
 @SpringBootApplication
 @EnableDiscoveryClient
 public class CurrencyConversionServiceApplication {
@@ -326,7 +337,7 @@ public class CurrencyConversionServiceApplication {
 		SpringApplication.run(CurrencyConversionServiceApplication.class, args);
 	}
 }
-
+```
 Add below configuration in application.property file.
 *******************
 eureka.client.service-url.default-zone=http://localhost:8761/eureka
@@ -359,6 +370,7 @@ spring.cloud.config.discovery.enabled=true
 
 >Add below annotation enable Zuul.
 *******************
+```java 
 @EnableZuulProxy
 @EnableDiscoveryClient
 @SpringBootApplication
@@ -368,9 +380,10 @@ public class NetflixZuulApiGatewayServerApplication {
 		SpringApplication.run(NetflixZuulApiGatewayServerApplication.class, args);
 	}
 }
-
+```
 >Create Logging Filter
 *******************
+```java 
 @Component
 public class ZuulLoggingFilter extends ZuulFilter {
 
@@ -402,7 +415,7 @@ public class ZuulLoggingFilter extends ZuulFilter {
 		return 1;
 	}
 }
-
+```
 >It's must to use the URIs in below format to work with Zuul API GATEWAY.
 *******************
 /[application-name]/URI
@@ -411,7 +424,7 @@ with API:/currency-exchange-rate-service/exchange-rate/api/v1/from/{from}/to/{to
 
 //@FeignClient(name = "currency-exchange-rate-service", url = "localhost:8000")
 //@FeignClient(name = "currency-exchange-rate-service")
-
+```java 
 @FeignClient(name = "netflix-zuul-api-gateway-server")
 @RibbonClient(name="currency-exchange-rate-service")
 public interface ExchangeRateControllerProxy {
@@ -421,7 +434,7 @@ public interface ExchangeRateControllerProxy {
 	@GetMapping("/currency-exchange-rate-service/exchange-rate/api/v1/from/{from}/to/{to}")	
 	public CurrencyConverterBean currencyExchange(@PathVariable("from") String from, @PathVariable("to") String to);
 }
-
+```
 >The Final URI that will be used to outer world is like below.
 *******************
 http://localhost:8765/currency-conversion-service/currency-conversion-feign/api/v1/from/USD/to/INR/quantity/22
@@ -442,11 +455,12 @@ http://localhost:8765/currency-conversion-service/currency-conversion-feign/api/
 >Add below code to enable the id generation.
 *******************
 //To link centralized tracing id.
+```java 
 @Bean
 public Sampler defaultSampler() {
 	return Sampler.ALWAYS_SAMPLE;
 }
-
+```
 >Add the appropriate log in individual modules.
 *******************
 

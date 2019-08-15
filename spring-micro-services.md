@@ -21,7 +21,9 @@ Spring Cloud Config Server, Netflix Eureka, Netflix Zuul, Zipkin
  
 
 ##### Use below annotation to define the application as Spring-Cloud-Config-Server
+
 ```java 
+
 @EnableConfigServer
 @SpringBootApplication
 public class SpringCloudConfigServerApplication {
@@ -33,21 +35,27 @@ public class SpringCloudConfigServerApplication {
 ```
 
 #####  Make below changes in applicaiton.properties file
+
 ```properties 
 spring.application.name=spring-cloud-config-server
 server.port=8888
 ```
+
 #####  Add belwo changes in bootstrap.properties file.
+
 ```properties 
 spring.cloud.config.server.bootstrap=true
 spring.cloud.config.server.git.clone-on-start=true
 ```
+
 ##### below change is to read files from git server direct using url
+
 ```properties 
 #spring.cloud.config.server.git.uri=https://github.com/suhailmansoori87/Git_Micro_Service_Config_Repo.git
 #below changes to read it from local git.
 spring.cloud.config.server.git.uri=file://${user.home}/git/Git_Micro_Service_Config_Repo
 ```
+
 ##### use [applicationName].[filename].propertyName in respective properties file
 #### Ex:
 Created currency-exchange-service.properties file:
@@ -75,7 +83,9 @@ Files in git repo[config server]
 //currency-exchange-rate-service.properties
 
 Ex:
+
 ```java 
+
 @Component
 @ConfigurationProperties(prefix="limit-service")
 public class LimitConfiguration {
@@ -85,17 +95,20 @@ public class LimitConfiguration {
 	
 	//Setters, Getters, Constructor
 }
-```java
+```
+```properties
 
 spring.application.name=limit-service
 limit-service.minimum=99
 limit-service.maximum=9999
-
+```
 Other way to read is:
 @RefreshScope
 
 Use full property name in place holder to read from config server.
+
 ```java 
+
 @Component
 @RefreshScope
 public class LimitConfiguration {

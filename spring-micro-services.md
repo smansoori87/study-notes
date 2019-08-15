@@ -3,7 +3,7 @@
 # ************Spring MS************
 ---
 
-[Rest Service Basics URI standards](
+[Best-Practices-For-Better-Restful-api](
 https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/)
 
 [GitHub URL to read Complete Project.](https://github.com/in28minutes/spring-microservices)

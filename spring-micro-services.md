@@ -1,28 +1,27 @@
--------------------------------------------------
-**************Spring MS************
--------------------------------------------------
+   
+---
+# ************Spring MS************
+---
 
-//Rest Service Basi URI standards.
-https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/
+[Rest Service Basics URI standards](
+https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/)
 
-GitHub URL:
-https://github.com/in28minutes/spring-microservices
+[GitHub URL to read Complete Project.](https://github.com/in28minutes/spring-microservices)
 
+## Topics
 Spring Cloud Config Server, Netflix Eureka, Netflix Zuul, Zipkin
 
-----------------------------------------------------------------------------------------------------
------------------------------Spring Cloud Config Server:--------------------------------------------
+---
+### Spring Cloud Config Server
+---
+- Centralized place for all the configuration for different micro services at different level like Dev, QA, Prod and so on...
+- Atleast use Boot 2.0.0M3[not snapshot]
+- give the appropriate artifact id.
+- add Devtools, Config Server dependencies while creating service.
+ 
 
--Centralized place for all the configuration for different micro services at different level like Dev, QA, Prod and so on...
-
--Atleast use Boot 2.0.0M3[not snapshot]
--give the appropriate artifact id.
--add Devtools, Config Server dependencies while creating service.
-
-----------------------------------------------------------------------------------------------------
---------------------------Spring-Cloud-Config-Server--------------------------------------------------------
-
--Use below annotation to define the application as Spring-Cloud-Config-Server
+##### Use below annotation to define the application as Spring-Cloud-Config-Server
+```java 
 @EnableConfigServer
 @SpringBootApplication
 public class SpringCloudConfigServerApplication {
@@ -31,30 +30,35 @@ public class SpringCloudConfigServerApplication {
 		SpringApplication.run(SpringCloudConfigServerApplication.class, args);
 	}
 }
+```
 
--MMake below changes in applicaiton.properties file
+#####  Make below changes in applicaiton.properties file
+```properties 
 spring.application.name=spring-cloud-config-server
 server.port=8888
-
--Add belwo changes in bootstrap.properties file.
+```
+#####  Add belwo changes in bootstrap.properties file.
+```properties 
 spring.cloud.config.server.bootstrap=true
 spring.cloud.config.server.git.clone-on-start=true
-#below change is to read files from git server direct using url 
+```
+##### below change is to read files from git server direct using url
+```properties 
 #spring.cloud.config.server.git.uri=https://github.com/suhailmansoori87/Git_Micro_Service_Config_Repo.git
 #below changes to read it from local git.
 spring.cloud.config.server.git.uri=file://${user.home}/git/Git_Micro_Service_Config_Repo
-
--use [applicationName].[filename].propertyName in respective properties file
-Ex:
+```
+##### use [applicationName].[filename].propertyName in respective properties file
+#### Ex:
 Created currency-exchange-service.properties file:
 currency-exchange-service.currency-exchange-model.conversionMultiple=89
 
-----------------------------------------------------------------------------------------
-----------------------------------Config server to client-----------------------------------------------------
-
-How to read data from Config server to client:
---Add below minimal dependencies to create a microservice that will read data from config-server.
--Devtools, Web, actuator, Config-client
+---
+### Config server to client
+---
+##### How to read data from Config server to client:
+- Add below minimal dependencies to create a microservice that will read data from config-server.
+[Devtools, Web, actuator, Config-client]
 
 @ConfigurationProperties("")
 - Annotation useful to read data from application.properties/config server respective to profiles.

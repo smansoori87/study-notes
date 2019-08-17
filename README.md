@@ -1,2 +1,0 @@
-# study-notes
-short notes.

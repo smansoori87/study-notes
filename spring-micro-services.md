@@ -9,7 +9,12 @@ https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-a
 [GitHub URL to read Complete Project.](https://github.com/in28minutes/spring-microservices)
 
 ## Topics
-Spring Cloud Config Server, Netflix Eureka, Netflix Zuul, Zipkin
+
+-Spring-Cloud-Config-Server
+-Config server to client
+-Spring JPA
+-Spring Feign
+-Spring Ribbon
 
 ---
 ### Spring Cloud Config Server

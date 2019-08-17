@@ -14,7 +14,9 @@ https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-a
 -Config server to client
 -Spring JPA
 -Spring Feign
--Spring Ribbon
+-Spring Ribbon [client side load balancing of multiple MS]
+-Eureka Naming Server
+-
 
 ---
 ### Spring Cloud Config Server

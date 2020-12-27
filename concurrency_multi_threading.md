@@ -186,5 +186,5 @@ public class DeadlockTest {
 
 # Executor Framework
 ---
-![Screenshot](https://github.com/smansoori87/study-notes/blob/master/images/executor_framework_interface.png)
+![Screenshot](https://github.com/smansoori87/study-notes/blob/master/images/executor_framework_interfaces.png)
 

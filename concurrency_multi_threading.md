@@ -28,7 +28,7 @@ To prevent **race condition**(when 2 or more thread trying to read/write same ob
 	 ..
 	}
 ```
-**c. Static Method:** it is at class level. so in such case thread will use class as a monitor to prevent other threads to enter into critical area.
+**d. Static Method:** it is at class level. so in such case thread will use class as a monitor to prevent other threads to enter into critical area.
 ```java
 	public static synchronized void doSomething(){
 	 ..
@@ -154,3 +154,33 @@ public class DeadlockTest {
 	}
 }
 ```
+### Different Methods
+----
+
+###### wait();
+- wait is used to release the lock from current thread and move it into wait pool.
+- wait is bound to object and object only can invoke the wait method to release the lock from current thread.
+- wait can be used only in synchronized block or method. Its because practically it will make scence to move any thread in wait condition if other thread waiting to accure the current lock.
+###### notify();
+- notify isp art of object class and as wait method, lock object can give signal to jvm to notify the waiting thread.
+- in case of notify only one thread from waitpool(waiting for the same lock/mutex) will be notified based on algorithm.
+###### notifyAll();
+- notifyAll will invoke all the waiting threads from wait pool and only one thread will get opportunity to accure the lock on object.
+###### sleep();
+- sleep is part of thread class and it will make sure tomake current thread sleep for period of time.
+- while thread is in sleep condition, no lock will be released and post sleep duration same thread will continue with execution.
+
+###### join();
+- part of Thread class. and will makesure to wait other threads to complete the current thread task.
+-Ex: if t1 thread part of main thread and we are using t1.join(). main thread has to wait for its exection untill t1 is not completing its task.
+
+###### yeild();
+- yeild is part of thread class. and indicating jvm to push current running thread into waiting condition.
+- in case there are any high priority threads available in runnable pool, jvm will give cpu to task exection. or else jvm will give chance to same or other same priority thread.
+
+
+#### volatile keyword
+- Volatile keyword is used to modify the value of a variable by different threads.
+- The volatile keyword can be used either with primitive type or objects. The volatile keyword cannot be used with classes or methods.
+- In case of multicore cpu, The volatile keyword does not cache the value of the variable and always read the variable from the main memory.
+

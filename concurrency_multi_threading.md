@@ -174,6 +174,56 @@ public class DeadlockTest {
 - part of Thread class. and will makesure to wait other threads to complete the current thread task.
 -Ex: if t1 thread part of main thread and we are using t1.join(). main thread has to wait for its exection untill t1 is not completing its task.
 
+```
+in below example, t1 and main thread will untill t2 is not completing its exection.
+```
+
+```java
+package prac.thread.concurrency;
+
+import java.util.concurrent.TimeUnit;
+
+public class JoinExam {
+	final static Object obj = new Object();
+	static int count = 0;
+
+	public static void main(String[] args) throws InterruptedException {
+
+		Thread t = new Thread(() -> {
+			synchronized (obj) {
+				for (int i = 0; i < 15; i++) {
+					count++;
+					System.out.println(Thread.currentThread().getName() + ":count:" + count);
+
+				}
+			}
+		}, "1");
+
+		Thread t2 = new Thread(() -> {
+			synchronized (obj) {
+				for (int i = 0; i < 5; i++) {
+					count++;
+					try {
+						TimeUnit.SECONDS.sleep(1);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					System.out.println(Thread.currentThread().getName() + ":count:" + count);
+				}
+			}
+
+		}, "2");
+		t2.start();
+		t.start();
+
+		// t.join();
+		t2.join();
+
+		System.out.println(Thread.currentThread().getName() + ":count:" + count);
+	}
+}
+```
+
 ###### yeild();
 - yeild is part of thread class. and indicating jvm to push current running thread into waiting condition.
 - in case there are any high priority threads available in runnable pool, jvm will give cpu to task exection. or else jvm will give chance to same or other same priority thread.
@@ -184,7 +234,32 @@ public class DeadlockTest {
 - The volatile keyword can be used either with primitive type or objects. The volatile keyword cannot be used with classes or methods.
 - In case of multicore cpu, The volatile keyword does not cache the value of the variable and always read the variable from the main memory.
 
+#### TimeUnit enum:
+- Mainly used to convert or specify time in specific units like seconds, nano, mili or so on. 
+- In context of Threads it can be used to give instruction in different time units to sleep, or wait the thread.
+
+```java
+try {
+	TimeUnit.SECONDS.sleep(1);
+} catch (InterruptedException e) {
+	e.printStackTrace();
+}
+```
+
 # Executor Framework
 ---
 ![Executor_Framework](https://github.com/smansoori87/study-notes/blob/master/images/executor_framework_interface_0.png)
+
+Executor framework is to use threads as service. There are many different implementation of Executor are available.
+- Threads are available in pool as a server.
+- once assigned task is complete, Executor will will assign new task to the Thread.
+- irrespective of normal Thread, Executor Threads will not stop untill Executor service is running.
+
+a. newSingleThreadExecutor(): 
+- Executor will complete all the submit task with single thread.	
+- only one thread will be there to serve all the request.
+
+b. newFixedThreadPool(int size): can create a pool of thread while specifying the pool size.
+
+c. 
 

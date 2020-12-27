@@ -184,3 +184,7 @@ public class DeadlockTest {
 - The volatile keyword can be used either with primitive type or objects. The volatile keyword cannot be used with classes or methods.
 - In case of multicore cpu, The volatile keyword does not cache the value of the variable and always read the variable from the main memory.
 
+# Executor Framework
+---
+![Screenshot](https://github.com/smansoori87/study-notes/blob/master/images/executor_framework_interface.png)
+

@@ -255,9 +255,9 @@ Executor framework is to use threads as service. There are many different implem
 - Threads are available in pool as a server.
 - once assigned task is complete, Executor will will assign new task to the Thread.
 - irrespective of normal Thread, Executor Threads will not stop untill Executor service is running.
-- Executor frame work support both Thread Interfaces(Runnable and Callable)
-** - Executor execute() method is to execute Runnable.
-- ExecutorService submit() method is to submit Callable. **
+- Executor frame work support both Thread Interfaces(Runnable and Callable) 
+- ** Executor execute() method is to execute Runnable. **
+- ** ExecutorService submit() method is to submit Callable. **
 
 #### a. newSingleThreadExecutor(): 
 - Executor will complete all the submit task with single thread.	
@@ -360,14 +360,14 @@ get() method of Future object.
 thread will moved into wait(). and on task completion Executor will notify all waiting thread to enquire on done flag. if done 
 is true, Future will return the object.
 
-```
+#### ** Example **
 In below example it is clearly visible.
 1. Creted a newSingleThreadExecutor();
 2. An list of Future object to collect all the Future from Callable.
-3. While submiting the Callable to Executor, Each time we are forcing thread to sleep for 5 sec.
+3. While submiting the Callable to Executor, Each time we are forcing thread to sleep random time between 3 to 10 sec.
 4. Post Submit, collecting all the future objects into ArryaList. 
-5. While Invoking get(), on each Future object we can in logs that each thread is waiting for 5 sec 
-before returning the result. and post 5 sec only next line getting executed.
+5. While Invoking get(), on each Future object we can check in logs that each thread is waiting for randome seconds
+before returning the result. and post timelapse only next line getting executed.
 
 **Note:**
 - While using callable it needs to make sure the Executor pool size to be optimal to achive 
@@ -375,11 +375,9 @@ the optimal perfmance and parallalism.
 - As many As threads available in pool does not mean all can get serveparallaly. as it is 
 completely depend on System Hardware and CPU Cores.
 - If there is 4 core CPU then only Max 4 threads can execute parallay.
-- If All tasks are submited, then while calling Future get() method, for each Future object Thread 
+- If All tasks are submited, Future get() method for each Future object Thread 
 needs to wait untill task is not completed. in such situation if any one of the future get() method 
-is hanged in processing then all the down object will still be waiting for there turn for collection.
-	
-```
+is hanged in processing then all the down objects will still be waiting for there turn of collection.
 
 ```java
 package prac.thread.concurrency;
@@ -453,4 +451,19 @@ public class CallableExam {
 		fixCallableThreadPool(users);
 	}
 }
+```
+#### O/P:
+```console
+in future...
+Thread-11 : id-0
+User Data: 0
+Thread-11 : id-1
+out future...Sec:4.023
+in future...
+Thread-11 : id-2
+User Data: 1
+out future...Sec:9.008
+in future...
+User Data: 2
+out future...Sec:8.005
 ```

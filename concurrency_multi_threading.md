@@ -605,4 +605,53 @@ public class CyclicBarrierExam {
 }
 ```
 
+## BlockinQueue
+- It is thread safe queue. where multiple thread can read and write data in queue.
+- Queue ** put() ** and ** take() ** method internally will take care of the size, wait and notify to manage the queue if it is full or empty.
+- classic example of Producer and Consumer problem where it was depend on wait() and notify() method in case if queue is empty or full.
+- in case producer is very fast, where consumer is very slow. in such case very frequently queue will be full with data. 
+Blocking Q will internally manage such case to control the Q to prevent from overflow.
+
+```java
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
+
+public class BlockingQueueExam {
+
+	public static void main(String[] args) {
+		BlockingQueue<Integer> bq = new ArrayBlockingQueue<>(5);
+		
+		new Thread(()->{
+			System.out.println("inside Producer...");
+			int count=0;
+			while(true) {
+				try {
+					bq.put(count);
+					TimeUnit.SECONDS.sleep(1);
+					System.out.println("data added in q: "+count);
+					count++;
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+
+		new Thread(()->{
+			System.out.println("inside Consumer...");
+			while(true) {
+				try {
+					int data = bq.take();
+					TimeUnit.SECONDS.sleep(4);
+					System.out.println("data taken from q: "+data);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+		System.out.println("Done!!!");	
+	}
+}
+```
+
 

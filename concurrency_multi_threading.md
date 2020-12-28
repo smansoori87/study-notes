@@ -246,20 +246,103 @@ try {
 }
 ```
 
-# Executor Framework
+## Executor Framework
 ---
-![Executor_Framework](https://github.com/smansoori87/study-notes/blob/master/images/executor_framework_interface_0.png)
+![Screenshot](https://github.com/smansoori87/study-notes/blob/master/images/executor_framework_interface.png)
+
 
 Executor framework is to use threads as service. There are many different implementation of Executor are available.
 - Threads are available in pool as a server.
 - once assigned task is complete, Executor will will assign new task to the Thread.
 - irrespective of normal Thread, Executor Threads will not stop untill Executor service is running.
 
-a. newSingleThreadExecutor(): 
+#### a. newSingleThreadExecutor(): 
 - Executor will complete all the submit task with single thread.	
 - only one thread will be there to serve all the request.
 
-b. newFixedThreadPool(int size): can create a pool of thread while specifying the pool size.
+#### b. newFixedThreadPool(int size): 
+- can create a pool of thread while specifying the pool size.
 
-c. 
+#### c. newScheduledThreadPool(int corePoolSize):
+- To call run method after every given duraion.
 
+```java
+ScheduledExecutorService ex = Executors.newScheduledThreadPool(2);
+for (Thread t : threads) {
+	ex.scheduleAtFixedRate(t, 1, 1, TimeUnit.SECONDS);
+	//scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit)
+}
+```
+
+#### shutdown()
+- executor will stop accepting any new task.
+- will shutdown the executor post completing all the task from pool.
+
+#### shutDownNow()
+- Attempts to stop all actively executing tasks, halts theprocessing of waiting task.
+- Returns a list of the tasks that were awaiting execution.
+
+#### awaitTermination(long timeout, TimeUnit unit)
+-Returns:true if this executor terminated and false if the timeout elapsed before termination
+
+```java
+public class ExecutorExam {
+
+	static void fixSizePool() {
+		Thread[] threads = new Thread[10];
+
+		for (int i = 0; i < threads.length; i++) {
+			threads[i] = new Thread(() -> {
+				try {
+					TimeUnit.SECONDS.sleep(1);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				System.out.println("Hi I am in fixSizePool..." + Thread.currentThread().getId());
+			});
+		}
+
+		ExecutorService exec = Executors.newFixedThreadPool(2);
+		for (Thread t : threads) {
+			exec.execute(t);
+		}
+		exec.shutdown();
+		
+	}
+
+	static void scheculedThreadPool() {
+		Thread[] threads = new Thread[10];
+
+		for (int i = 0; i < threads.length; i++) {
+			threads[i] = new Thread(() -> {
+				System.out.println("Hi I am in scheculedThreadPool..." + Thread.currentThread().getId());
+			});
+		}
+
+		ScheduledExecutorService ex = Executors.newScheduledThreadPool(2);
+		for (Thread t : threads) {
+			ex.scheduleAtFixedRate(t, 1, 1, TimeUnit.SECONDS);
+		}
+		
+		//**Will stop accepting any new tasks. and shutdown post pool completion.**
+		ex.shutdown();
+		
+		try {
+		//**will wait for 1000 seconds to complete the task.
+		//return true if this executor terminated and false if the timeout elapsed before termination.**	
+			if(!ex.awaitTermination(1000, TimeUnit.SECONDS)) {
+				//**Attempts to stop all actively executing tasks, halts theprocessing of waiting tasks, 
+				//and returns a list of the tasksthat were awaiting execution.**
+				ex.shutdownNow();
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void main(String[] args) {
+		fixSizePool();
+		scheculedThreadPool();
+	}
+}
+```

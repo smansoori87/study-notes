@@ -286,7 +286,10 @@ for (Thread t : threads) {
 - Returns a list of the tasks that were awaiting execution.
 
 #### awaitTermination(long timeout, TimeUnit unit)
--Returns:true if this executor terminated and false if the timeout elapsed before termination
+- Returns:true if this executor terminated and false if the timeout elapsed before termination
+- If there are 4 tasks running in Executor, calling the shutDown method will wait all the 4 task to get complete before shutting down the executor.
+- If we dont want to wait for ongoing task execution, calling the shutDownNow() will immediatly attempt to stop the taskes.
+- Before calling shutDownNow() if want to wait for some period of time, there is awaitTermination usefull.
 
 ```java
 public class ExecutorExam {

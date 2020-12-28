@@ -246,7 +246,7 @@ try {
 }
 ```
 
-## Executor Framework
+# Executor Framework
 ---
 ![Screenshot](https://github.com/smansoori87/study-notes/blob/master/images/executor_framework_interface.png)
 
@@ -255,6 +255,9 @@ Executor framework is to use threads as service. There are many different implem
 - Threads are available in pool as a server.
 - once assigned task is complete, Executor will will assign new task to the Thread.
 - irrespective of normal Thread, Executor Threads will not stop untill Executor service is running.
+- Executor frame work support both Thread Interfaces(Runnable and Callable)
+** - Executor execute() method is to execute Runnable.
+- ExecutorService submit() method is to submit Callable. **
 
 #### a. newSingleThreadExecutor(): 
 - Executor will complete all the submit task with single thread.	
@@ -343,6 +346,111 @@ public class ExecutorExam {
 	public static void main(String[] args) {
 		fixSizePool();
 		scheculedThreadPool();
+	}
+}
+```
+
+# Callable and Future
+---
+- While runnable does not have any option to return any response post task execution. Callable uses Future object to response 
+the result while invoking 
+get() method of Future object.
+- Future is wrapper arround Callable and will wait for task to complete before returning the result on call of get() method.
+- Internally Future logic is based on flag "done" which is boolean to check if task is complete or not. if Flag is false, Caller 
+thread will moved into wait(). and on task completion Executor will notify all waiting thread to enquire on done flag. if done 
+is true, Future will return the object.
+
+```
+In below example it is clearly visible.
+1. Creted a newSingleThreadExecutor();
+2. An list of Future object to collect all the Future from Callable.
+3. While submiting the Callable to Executor, Each time we are forcing thread to sleep for 5 sec.
+4. Post Submit, collecting all the future objects into ArryaList. 
+5. While Invoking get(), on each Future object we can in logs that each thread is waiting for 5 sec 
+before returning the result. and post 5 sec only next line getting executed.
+
+**Note:**
+- While using callable it needs to make sure the Executor pool size to be optimal to achive 
+the optimal perfmance and parallalism.
+- As many As threads available in pool does not mean all can get serveparallaly. as it is 
+completely depend on System Hardware and CPU Cores.
+- If there is 4 core CPU then only Max 4 threads can execute parallay.
+- If All tasks are submited, then while calling Future get() method, for each Future object Thread 
+needs to wait untill task is not completed. in such situation if any one of the future get() method 
+is hanged in processing then all the down object will still be waiting for there turn for collection.
+	
+```
+
+```java
+package prac.thread.concurrency;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
+class UserData {
+
+	private int id;
+	private String name;
+
+	UserData(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getId() {
+		return id;
+	}
+}
+
+public class CallableExam {
+
+	static void fixCallableThreadPool(UserData[] users) throws InterruptedException, ExecutionException {
+		ExecutorService ex = Executors.newSingleThreadExecutor();
+
+		List<Future<UserData>> futList = new ArrayList<>();
+
+		for (int i = 0; i < users.length; i++) {
+			final UserData ud = users[i];
+			Future<UserData> fut = ex.submit(() -> {
+				System.out.println("Thread-" + Thread.currentThread().getId() + " : id-" + ud.getId());
+				TimeUnit.SECONDS.sleep(new Random().ints(3, 10).findFirst().getAsInt());
+				return ud;
+			});
+			futList.add(fut);
+		}
+
+		// When calling get() method of Future Object, it will wait for threads to
+		// complete the assigned task. as internally it uses wait() based on "done" flag
+		// if thread not completed its task caller thread will go into wait condition.
+		// As can see in below example, get is waiting for 5 sec to jump into next line.
+		for (Future<UserData> fut : futList) {
+			Long startTime = System.currentTimeMillis();
+			System.out.println("in future...");
+			System.out.println("User Data: " + fut.get().getId());
+			System.out.println("out future...Sec:" + (System.currentTimeMillis() - startTime) / 1000F);
+		}
+
+		ex.shutdown();
+	}
+
+	public static void main(String[] args) throws InterruptedException, ExecutionException {
+		UserData[] users = new UserData[3];
+
+		for (int i = 0; i < users.length; i++) {
+			users[i] = new UserData(i, "Name-" + i);
+		}
+
+		fixCallableThreadPool(users);
 	}
 }
 ```

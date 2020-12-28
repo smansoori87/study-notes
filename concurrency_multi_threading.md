@@ -564,6 +564,7 @@ public class CountdownLatchExam {
 - It is as similar as CountDownLatch. Only the difference it will use **await()** method to manage the count.
 - Also CyclicBarrier have an overloaded constructor to define Runnable.
 - Once All threads execution complete and barrier reached its count, Runnable will execute.
+- Also CyclicBarrier have an option to **rest()** the count to further use it. 
 
 ```java
 import java.util.concurrent.BrokenBarrierException;
@@ -603,4 +604,5 @@ public class CyclicBarrierExam {
 	}
 }
 ```
-- Also CyclicBarrier have an option to **rest()** the count to further use it. 
+
+

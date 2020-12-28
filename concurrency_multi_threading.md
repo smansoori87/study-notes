@@ -60,65 +60,68 @@ public class Test {
 #### In below example there are 2 instance and 2 static methods. so at a time class level between thread 1 or 2 and instnace level between 3 or 4 can be executed.
 **Note:** There will not be any lock on static data members. it will be shared in between static and instance methods.
 ```java
-public class ThreadExam {
+public class SynchronizedExam {
 	static int j = 10;
-	
+
 	final static Object lock = new Object();
 	final Object lock1 = new Object();
-	
+
 	void thirdThread() {
-		System.out.println(Thread.currentThread().getName() );
+		System.out.println(Thread.currentThread().getName());
 		synchronized (lock1) {
 			while (j > 0)
 				System.out.println(Thread.currentThread().getName() + ":j:" + j--);
 		}
 	}
-	
+
 	void fourthThread() {
-		System.out.println(Thread.currentThread().getName() );
+		System.out.println(Thread.currentThread().getName());
 		synchronized (lock1) {
 			while (j > 0)
 				System.out.println(Thread.currentThread().getName() + ":j:" + j--);
 		}
 	}
-	
+
 	static void secondThread() {
 		synchronized (lock) {
 			while (j > 0)
 				System.out.println(Thread.currentThread().getName() + ":j:" + j--);
 		}
 	}
+
 	static void mainThread() {
-		System.out.println(Thread.currentThread().getName() );
+		System.out.println(Thread.currentThread().getName());
 		synchronized (lock) {
 			while (j > 0)
 				System.out.println(Thread.currentThread().getName() + ":j:" + j--);
 		}
 	}
+
 	public static void main(String[] args) {
 		Thread t1 = new Thread(() -> {
 			mainThread();
 		}, "1");
-		
+
 		Thread t2 = new Thread(() -> {
 			secondThread();
 		}, "2");
-		ThreadExam tExam = new ThreadExam();
-		
+		SynchronizedExam tExam = new SynchronizedExam();
+
 		Thread t3 = new Thread(() -> {
 			tExam.thirdThread();
 		}, "3");
-		
+
 		Thread t4 = new Thread(() -> {
 			tExam.fourthThread();
 		}, "4");
-		
+
 		t1.start();
 		t2.start();
 		t3.start();
 		t4.start();
 	}
 }
+
 ```
 ### Deadlock
 > In below example there are 2 thread waiting for each other in to
@@ -469,4 +472,82 @@ out future...Sec:9.008
 in future...
 User Data: 2
 out future...Sec:8.005
+```
+
+## CountDownLatch
+- A synchronization aid that allows one or more threads to wait until a set of operations being performed in other threads completes. 
+- A CountDownLatch is initialized with a given count. The await methods block until the current count reaches zero due to invocations of the countDown method, after which all waiting threads are released and any subsequent invocations of await return immediately. 
+
+**Important Methods:**
+- countDown: will decrement the latch value by one.
+- await: will make other threads to wait until latch is not going to reach value 0.
+- await(time, timeunit): will make sure to break the waiting condition if tasks are not executed in given time or latch reach to 0.
+
+```java
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+public class CountdownLatchExam {
+
+	private static void countDownLatchWithTimeoutAwait() throws InterruptedException {
+		ExecutorService es = Executors.newSingleThreadExecutor();
+		final CountDownLatch cdLatch = new CountDownLatch(5);
+		for (int i = 0; i < 3; i++) {
+			es.execute(() -> {
+				System.out.println("Inside Run..." + Thread.currentThread().getId());
+				try {
+					TimeUnit.SECONDS.sleep(3);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				cdLatch.countDown();
+			});
+		}
+
+		System.out.println("All Task Submited, and latch counter is waitng for 0...");
+		cdLatch.await(10, TimeUnit.SECONDS);
+		System.out.println("All task finished...");
+
+	}
+
+	static void countDownLatchKeepWaiting() throws InterruptedException {
+		ExecutorService es = Executors.newSingleThreadExecutor();
+		final CountDownLatch cdLatch = new CountDownLatch(5);
+		for (int i = 0; i < 3; i++) {
+			es.execute(() -> {
+				System.out.println("Inside Run..." + Thread.currentThread().getId());
+				try {
+					TimeUnit.SECONDS.sleep(3);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				cdLatch.countDown();
+			});
+		}
+
+		System.out.println("All Task Submited, and latch counter is waitng for 0...");
+		cdLatch.await();
+		System.out.println("All task finished...");
+	}
+
+	public static void main(String[] args) throws InterruptedException {
+
+		/*
+		 * await(long timeout, TimeUnit unit), is to timeout the latch in case if
+		 * Threads execution not finished in given timeunit.
+		 */
+		countDownLatchWithTimeoutAwait();
+
+		/*
+		 * When there is any mismatch in no. of task and threads execution or any of the
+		 * thread task failed during execution which miss the cdLatch.countDown()
+		 * execution. In such case latch await will keep waiting for Latch to get 0. In
+		 * this situation it can wait for infinite time and application will hang in
+		 * condition.
+		 */
+		countDownLatchKeepWaiting();
+	}
+}
 ```

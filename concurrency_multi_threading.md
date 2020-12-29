@@ -797,6 +797,27 @@ Thread-2 :takeNum: User [id=5, name=Wishly]
 - Thread safe, can be used in multithreaded env.
 - To store Key value pair and can be shared among multiple threads.
 
-- 
+## Exchanger
+- Thread safe class to exchange data between two threads.
+- It simplifies the exchange of data between two threads. 
+- Its operation is simple: it simply waits until two separate threads call its exchange() method. 
+When that occurs, it exchanges the data supplied by the threads. It can also be viewed as a bidirectional SynchronousQueue. 
+It is a generic class that is declared as below.
 
+**Methods:**
 
+exchange(V x)
+– When invoked this function causes the current thread to suspend its execution and wait for another thread to call its exchange method. When another thread calls its exchange method, the threads exchange their data and the execution resumes.
+
+Syntax:
+```java
+public V exchange(V x) throws InterruptedException
+```
+
+public exchange(V x, long timeout, TimeUnit unit)
+– When invoked this function causes the current thread to suspend its execution and wait for another thread to call its exchange method. When another thread calls its exchange method, the threads exchange their data and the execution resumes. The thread waits only for the duration specified by the timeout argument and in case if timeout duration elapses, a TimeoutException is thrown.
+
+Syntax:
+```java
+public V exchange(V x, long timeout, TimeUnit unit) throws InterruptedException, TimeoutException
+```

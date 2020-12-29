@@ -653,5 +653,150 @@ public class BlockingQueueExam {
 	}
 }
 ```
+## Delayed Queue
+- This queue is making objects available only after objects are expired.
+- element can only be taken when its delay has expired.  The <em>head</em> of the queue is that
+- If no delay has expired there is no head and {@code poll} will return {@code null}. 
+- Even though unexpired elements cannot be removed using {@code take} or {@code poll}.
+- size method returns the count of both expired and unexpired elements.
+- This queue does not permit null elements.
+
+## PriorityQueue
+- Thread safe Queue, store objects or premitive data types in sorted order.
+- In case of custom object, there is need to implement the Comparable interface. 
+  and the compare to method need to specify with the fields details on which sorting needs to apply.
+- This queue does not permit null elements.
+- There are method ** put() ** and **take()** to add and retrive the data.
+
+#### Ex: Primitive Data  
+```java
+import java.util.Random;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.PriorityBlockingQueue;
+import java.util.concurrent.TimeUnit;
+
+public class PriorityQueueExam {
+
+	static void writeData(BlockingQueue<Integer> bq) {
+		Random random = new Random();
+		while (bq.size() != 5) {
+			int num = random.ints(1, 10).findFirst().getAsInt();
+			try {
+				bq.put(num);
+				System.out.println("Thread-" + Thread.currentThread().getName() + " :addNum: " + num);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	static void readData(BlockingQueue<Integer> bq) {
+		try {
+			TimeUnit.SECONDS.sleep(5);
+			while (!bq.isEmpty()) {
+				System.out.println("Thread-" + Thread.currentThread().getName() + " :takeNum: " + bq.take());
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void main(String[] args) {
+		BlockingQueue<Integer> bq = new PriorityBlockingQueue<>();
+		new Thread(() -> {
+			writeData(bq);
+		}, "1").start();
+
+		new Thread(() -> {
+			readData(bq);
+		}, "2").start();
+	}
+}
+
+O/P:
+Thread-1 :addNum: 7
+Thread-1 :addNum: 2
+Thread-1 :addNum: 3
+Thread-1 :addNum: 1
+Thread-1 :addNum: 5
+Thread-2 :takeNum: 1
+Thread-2 :takeNum: 2
+Thread-2 :takeNum: 3
+Thread-2 :takeNum: 5
+Thread-2 :takeNum: 7
+```
+
+### Ex: Custom Objects, using Comparable
+
+```java
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.PriorityBlockingQueue;
+import java.util.concurrent.TimeUnit;
+
+class User implements Comparable<User> {
+	int id;
+	String name;
+
+	User(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	@Override
+	public int compareTo(User o) {
+		return this.name.compareTo(o.name);
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + "]";
+	}
+}
+
+public class PriorityQueueExam {
+
+	static void writeThread(BlockingQueue<User> bq) {
+		bq.add(new User(1, "Sam"));
+		bq.add(new User(200, "Piter"));
+		bq.add(new User(10, "Arno"));
+		bq.add(new User(5, "Wishly"));
+		
+	}
+
+	static void readThread(BlockingQueue<User> bq) {
+		try {
+			TimeUnit.SECONDS.sleep(5);
+			while (!bq.isEmpty()) {
+				System.out.println("Thread-" + Thread.currentThread().getName() + " :takeNum: " + bq.take().toString());
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void main(String[] args) {
+		BlockingQueue<User> bq = new PriorityBlockingQueue<>();
+		new Thread(() -> {
+			writeThread(bq);
+		}, "1").start();
+
+		new Thread(() -> {
+			readThread(bq);
+		}, "2").start();
+	}
+}
+
+O/P:
+Thread-2 :takeNum: User [id=10, name=Arno]
+Thread-2 :takeNum: User [id=200, name=Piter]
+Thread-2 :takeNum: User [id=1, name=Sam]
+Thread-2 :takeNum: User [id=5, name=Wishly]
+```
+
+## ConcurretMap
+- Thread safe, can be used in multithreaded env.
+- To store Key value pair and can be shared among multiple threads.
+
+- 
 
 

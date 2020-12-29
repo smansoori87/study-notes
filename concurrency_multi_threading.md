@@ -259,7 +259,7 @@ try {
 
 # Executor Framework
 ---
-![Screenshot](https://github.com/smansoori87/study-notes/blob/master/images/executor_framework_interface.png)
+![Executor_Framework_Interface](https://github.com/smansoori87/study-notes/blob/master/images/executor_framework_interface.png)
 
 
 Executor framework is to use threads as service. There are many different implementation of Executor are available.
@@ -794,28 +794,45 @@ Thread-2 :takeNum: User [id=5, name=Wishly]
 ```
 
 ## ConcurretMap
-- Thread safe, can be used in multithreaded env.
-- To store Key value pair and can be shared among multiple threads.
+![Concurrent_Hashmap](https://github.com/smansoori87/study-notes/blob/master/images/concurrent-hashmap.jpg)
+- The underlined data structure for ConcurrentHashMap is Hashtable.
+- ConcurrentHashMap class is thread-safe i.e. multiple threads can operate on a single object without any complications.
+- At a time any number of threads are applicable for a read operation without locking the ConcurrentHashMap object which is not there in HashMap.
+- In ConcurrentHashMap, the Object is divided into a number of segments according to the concurrency level.
+- The default concurrency-level of ConcurrentHashMap is 16.
+- In ConcurrentHashMap, at a time any number of threads can perform retrieval operation but for updation in the object, the thread must lock the particular segment in which the thread wants to operate. This type of locking mechanism is known as Segment locking or bucket locking. Hence at a time, 16 update operations can be performed by threads.
+- Inserting null objects is not possible in ConcurrentHashMap as key or value.
+
+**Constructors of ConcurrentHashMap**
+- Concurrency-Level: It is the number of threads concurrently updating the map. The implementation performs internal sizing to try to accommodate this many threads.
+- Load-Factor: It’s a threshold, used to control resizing.
+- Initial Capacity: Accommodation of a certain number of elements initially provided by the implementation. if the capacity of this map is 10. It means that it can store 10 entries.
+
+**Constructors**
+1. **ConcurrentHashMap()** : Creates a new, empty map with a default initial capacity (16), load factor (0.75) and concurrencyLevel (16).
+2. **ConcurrentHashMap(int initialCapacity)** : Creates a new, empty map with the specified initial capacity, and with default load factor (0.75) and concurrencyLevel (16).
+3. **ConcurrentHashMap(int initialCapacity, float loadFactor)** : Creates a new, empty map with the specified initial capacity and load factor and with the default concurrencyLevel (16).
+4. **ConcurrentHashMap(int initialCapacity, float loadFactor, int concurrencyLevel)**: Creates a new, empty map with the specified initial capacity, load factor, and concurrency level.
+5. **ConcurrentHashMap(Map m)**: Creates a new map with the same mappings as the given map.
 
 ## Exchanger
-- Thread safe class to exchange data between two threads.
-- It simplifies the exchange of data between two threads. 
+- Thread safe class to exchange data between two threads. 
 - Its operation is simple: it simply waits until two separate threads call its exchange() method. 
 When that occurs, it exchanges the data supplied by the threads. It can also be viewed as a bidirectional SynchronousQueue. 
 It is a generic class that is declared as below.
 
 **Methods:**
 
-exchange(V x)
-– When invoked this function causes the current thread to suspend its execution and wait for another thread to call its exchange method. When another thread calls its exchange method, the threads exchange their data and the execution resumes.
+exchange(V x):
+- When invoked this function causes the current thread to suspend its execution and wait for another thread to call its exchange method. When another thread calls its exchange method, the threads exchange their data and the execution resumes.
 
 Syntax:
 ```java
 public V exchange(V x) throws InterruptedException
 ```
 
-public exchange(V x, long timeout, TimeUnit unit)
-– When invoked this function causes the current thread to suspend its execution and wait for another thread to call its exchange method. When another thread calls its exchange method, the threads exchange their data and the execution resumes. The thread waits only for the duration specified by the timeout argument and in case if timeout duration elapses, a TimeoutException is thrown.
+public exchange(V x, long timeout, TimeUnit unit):
+- When invoked this function causes the current thread to suspend its execution and wait for another thread to call its exchange method. When another thread calls its exchange method, the threads exchange their data and the execution resumes. The thread waits only for the duration specified by the timeout argument and in case if timeout duration elapses, a TimeoutException is thrown.
 
 Syntax:
 ```java

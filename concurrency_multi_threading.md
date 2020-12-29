@@ -1,5 +1,5 @@
 # Synchronization
-To prevent **race condition**(when 2 or more thread trying to read/write same object/variable) while dealing with multiple threads.
+- To prevent **race condition**(when 2 or more thread trying to read/write same object/variable) while dealing with multiple threads.
 **Monitor:** Key which is used to synchronized the method.
 
 ## Synchronized Type
@@ -256,6 +256,14 @@ try {
 	e.printStackTrace();
 }
 ```
+
+# Different types of Lock in Java
+1. ReentrantLock
+2. ReadWriteLock
+3. StampedLock
+4. optimistic Locking
+ 
+https://winterbe.com/posts/2015/04/30/java8-concurrency-tutorial-synchronized-locks-examples/
 
 # Executor Framework
 ---
@@ -605,9 +613,9 @@ public class CyclicBarrierExam {
 }
 ```
 
-## BlockinQueue
+## BlockingQueue
 - It is thread safe queue. where multiple thread can read and write data in queue.
-- Queue ** put() ** and ** take() ** method internally will take care of the size, wait and notify to manage the queue if it is full or empty.
+- Queue **put()** and **take()** method internally will take care of the size, wait and notify to manage the queue if it is full or empty.
 - classic example of Producer and Consumer problem where it was depend on wait() and notify() method in case if queue is empty or full.
 - in case producer is very fast, where consumer is very slow. in such case very frequently queue will be full with data. 
 Blocking Q will internally manage such case to control the Q to prevent from overflow.

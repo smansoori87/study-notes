@@ -804,9 +804,9 @@ Thread-2 :takeNum: User [id=5, name=Wishly]
 - Inserting null objects is not possible in ConcurrentHashMap as key or value.
 
 **Constructors of ConcurrentHashMap**
-- Concurrency-Level: It is the number of threads concurrently updating the map. The implementation performs internal sizing to try to accommodate this many threads.
-- Load-Factor: It’s a threshold, used to control resizing.
-- Initial Capacity: Accommodation of a certain number of elements initially provided by the implementation. if the capacity of this map is 10. It means that it can store 10 entries.
+- **Concurrency-Level:** It is the number of threads concurrently updating the map. The implementation performs internal sizing to try to accommodate this many threads.
+- **Load-Factor:** It is a threshold, used to control resizing.
+- **Initial Capacity:** Accommodation of a certain number of elements initially provided by the implementation. if the capacity of this map is 10. It means that it can store 10 entries.
 
 **Constructors**
 1. **ConcurrentHashMap()** : Creates a new, empty map with a default initial capacity (16), load factor (0.75) and concurrencyLevel (16).

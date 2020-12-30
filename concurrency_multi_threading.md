@@ -846,3 +846,67 @@ Syntax:
 ```java
 public V exchange(V x, long timeout, TimeUnit unit) throws InterruptedException, TimeoutException
 ```
+
+# Fork-Join Framework
+---
+It is concrete implementation for parallel execution.
+
+#### Fork-Join Framework
+![fork-join-framework_1](https://github.com/smansoori87/study-notes/blob/master/images/fork-join-framework_1.JPG)
+
+#### ForkJoinTask extensions
+![fork-join-framework_2](https://github.com/smansoori87/study-notes/blob/master/images/fork-join-framework_2.JPG)
+
+#### Fork Activity
+![fork_1](https://github.com/smansoori87/study-notes/blob/master/images/fork_1.JPG)
+
+#### Join Activity
+![join_1](https://github.com/smansoori87/study-notes/blob/master/images/join_1.JPG)
+
+#### SimpleRecurivAction Example:
+```java
+Compute Logic:
+
+import java.util.concurrent.RecursiveAction;
+
+public class SimpleRecursiveAction extends RecursiveAction {
+
+	private static final long serialVersionUID = 1L;
+
+	private int input;
+
+	public SimpleRecursiveAction(int input) {
+		this.input = input;
+	}
+
+	@Override
+	protected void compute() {
+		if (input > 50) {
+			System.out.println("Task is in " + "devide...:" + input);
+			SimpleRecursiveAction sra1 = new SimpleRecursiveAction(input / 2);
+			SimpleRecursiveAction sra2 = new SimpleRecursiveAction(input / 2);
+
+			sra1.fork();
+			sra2.fork();
+		} else {
+			System.out.println("Task is not big enough to further devide...:" + input);
+		}
+	}
+}
+
+Client:
+
+import java.util.concurrent.ForkJoinPool;
+
+public class SimpleRecursiveActionClient {
+
+	public static void main(String[] args) {
+		ForkJoinPool fjp = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
+		System.out.println("Processors: "+Runtime.getRuntime().availableProcessors());
+		SimpleRecursiveAction sra = new SimpleRecursiveAction(100);
+		fjp.invoke(sra);
+	}
+}
+```
+
+

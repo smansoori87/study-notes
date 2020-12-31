@@ -267,7 +267,7 @@ https://winterbe.com/posts/2015/04/30/java8-concurrency-tutorial-synchronized-lo
 
 # Executor Framework
 ---
-![Executor_Framework_Interface](https://github.com/smansoori87/study-notes/blob/master/images/executor_framework_interface.png)
+![Executor_Framework_Interface](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/executor_framework_interface.png)
 
 
 Executor framework is to use threads as service. There are many different implementation of Executor are available.
@@ -802,7 +802,7 @@ Thread-2 :takeNum: User [id=5, name=Wishly]
 ```
 
 ## ConcurretMap
-![Concurrent_Hashmap](https://github.com/smansoori87/study-notes/blob/master/images/concurrent-hashmap.jpg)
+![Concurrent_Hashmap](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/concurrent-hashmap.jpg)
 - The underlined data structure for ConcurrentHashMap is Hashtable.
 - ConcurrentHashMap class is thread-safe i.e. multiple threads can operate on a single object without any complications.
 - At a time any number of threads are applicable for a read operation without locking the ConcurrentHashMap object which is not there in HashMap.
@@ -852,16 +852,16 @@ public V exchange(V x, long timeout, TimeUnit unit) throws InterruptedException,
 It is concrete implementation for parallel execution.
 
 #### Fork-Join Framework
-![fork-join-framework_1](https://github.com/smansoori87/study-notes/blob/master/images/fork-join-framework_1.JPG)
+![fork-join-framework_1](https://github.com/smansoori87/study-notes/blob/master/images/concurrencyfork-join-framework_1.JPG)
 
 #### ForkJoinTask extensions
-![fork-join-framework_2](https://github.com/smansoori87/study-notes/blob/master/images/fork-join-framework_2.JPG)
+![fork-join-framework_2](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/fork-join-framework_2.JPG)
 
 #### Fork Activity
-![fork_1](https://github.com/smansoori87/study-notes/blob/master/images/fork_1.JPG)
+![fork_1](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/fork_1.JPG)
 
 #### Join Activity
-![join_1](https://github.com/smansoori87/study-notes/blob/master/images/join_1.JPG)
+![join_1](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/join_1.JPG)
 
 #### SimpleRecurivAction Example:
 ```java

@@ -852,7 +852,7 @@ public V exchange(V x, long timeout, TimeUnit unit) throws InterruptedException,
 It is concrete implementation for parallel execution.
 
 #### Fork-Join Framework
-![fork-join-framework_1](https://github.com/smansoori87/study-notes/blob/master/images/concurrencyfork-join-framework_1.JPG)
+![fork-join-framework_1](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/fork-join-framework_1.JPG)
 
 #### ForkJoinTask extensions
 ![fork-join-framework_2](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/fork-join-framework_2.JPG)
@@ -908,5 +908,3 @@ public class SimpleRecursiveActionClient {
 	}
 }
 ```
-
-

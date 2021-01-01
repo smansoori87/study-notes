@@ -367,31 +367,33 @@ eureka.client.service-url.default-zone=http://localhost:8761/eureka
 To talk to other services just use Ribbon and Feign with service name and it will work like pro... :)
 Also comment the "currency-exchange-rate-service.ribbon.listOfServers" if there is any in applicaiton.properties.
 
----------------------------------------------------------------------------------------------------------------------
-----------------------Config Server with Name Server------------------------------------------------------------------
 
-How to link Config Server with Name Server and connect with client.
-*******************
->To do the same enable config server with EurekaClient dependencies as mentioend in above steps.
->To read data from config server add below property in application/bootstrap.properties.
+## Config Server with Name Server
 
+### How to link Config Server with Name Server and connect with client.
+
+- To do the same enable config server with EurekaClient dependencies as mentioend in above steps.
+- To read data from config server add below property in application/bootstrap.properties.
+
+```properties
 spring.cloud.config.discovery.enabled=true
+```
 
----------------------------------------------------------------------------------------------------------------------
-----------------------ZUUL - API GateWay------------------------------------------------------------------
+## ZUUL - API GateWay
 
->Front Controller to MS arc. All the calls and request will go through the same gateway.
->Enable the Nameserver configuration as client.
+- Front Controller to MS arc. All the calls and request will go through the same gateway.
+- Enable the Nameserver configuration as client.
 
->Add below dependency into pom.xml to start with ZUUL.
-*******************
+- Add below dependency into pom.xml to start with ZUUL.
+```xml
 <dependency>
 	<groupId>org.springframework.cloud</groupId>
 	<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
 </dependency>
+```
 
->Add below annotation enable Zuul.
-*******************
+- Add below annotation enable Zuul.
+
 ```java 
 @EnableZuulProxy
 @EnableDiscoveryClient
@@ -403,8 +405,9 @@ public class NetflixZuulApiGatewayServerApplication {
 	}
 }
 ```
->Create Logging Filter
-*******************
+
+- Create Logging Filter
+
 ```java 
 @Component
 public class ZuulLoggingFilter extends ZuulFilter {
@@ -438,14 +441,17 @@ public class ZuulLoggingFilter extends ZuulFilter {
 	}
 }
 ```
->It's must to use the URIs in below format to work with Zuul API GATEWAY.
-*******************
+
+- It's must to use the URIs in below format to work with Zuul API GATEWAY.
+```
 /[application-name]/URI
 original : /exchange-rate/api/v1/from/{from}/to/{to}
 with API:/currency-exchange-rate-service/exchange-rate/api/v1/from/{from}/to/{to}
 
 //@FeignClient(name = "currency-exchange-rate-service", url = "localhost:8000")
 //@FeignClient(name = "currency-exchange-rate-service")
+```
+
 ```java 
 @FeignClient(name = "netflix-zuul-api-gateway-server")
 @RibbonClient(name="currency-exchange-rate-service")
@@ -457,43 +463,39 @@ public interface ExchangeRateControllerProxy {
 	public CurrencyConverterBean currencyExchange(@PathVariable("from") String from, @PathVariable("to") String to);
 }
 ```
->The Final URI that will be used to outer world is like below.
-*******************
+- The Final URI that will be used to outer world is like below.
+
 http://localhost:8765/currency-conversion-service/currency-conversion-feign/api/v1/from/USD/to/INR/quantity/22
 
----------------------------------------------------------------------------------------------------------------------
-----------------------Spring Cloud Sleuth------------------------------------------------------------------
+## Spring Cloud Sleuth
 
->In MS as there will ne n number of components which are intracting to each other its very had to manage the request flow.
->Spring Sleuth use to provide the mechanism to manage the centeralize tracing id in flow of request. so it can be easeley track.
+- In MS as there will ne n number of components which are intracting to each other its very had to manage the request flow.
+- Spring Sleuth use to provide the mechanism to manage the centeralize tracing id in flow of request. so it can be easeley track.
 
->Add Below dependency in pom.xml
-*******************
+- Add Below dependency in pom.xml
+```xml
 <dependency>
 	<groupId>org.springframework.cloud</groupId>
 	<artifactId>spring-cloud-starter-sleuth</artifactId>
 </dependency>
+```
+- Add below code to enable the id generation.
 
->Add below code to enable the id generation.
-*******************
-//To link centralized tracing id.
+- //To link centralized tracing id.
 ```java 
 @Bean
 public Sampler defaultSampler() {
 	return Sampler.ALWAYS_SAMPLE;
 }
 ```
->Add the appropriate log in individual modules.
-*******************
 
->Log O/P sample
+- Add the appropriate log in individual modules.
+- Log O/P sample
 *******************
 2016-06-17 16:12:36.902 INFO [slueth-sample,432943172b958030,432943172b958030,false] 12157 --- [nio-8080-exec-2] com.example.SleuthSampleApplication : calling home 2016-06-17 16:12:36.940 INFO [slueth-sample,432943172b958030,b4d88156bc6a49ec,false] 12157 --- [nio-8080-exec-3] com.example.SleuthSampleApplication : you called home
 [slueth-sample,432943172b958030,b4d88156bc6a49ec,false]
 [application-name,  trace id, span id,  indicate whether the span should be exported to Zipkin]
 
----------------------------------------------------------------------------------------------------------------------
-----------------------Zipkin------------------------------------------------------------------
+## Zipkin
 >Spring Finchley.M3 onwards, due to compatability issue with Sleuth, Spring-boot removed zipkin from stack.
 >There is way to use indipendently the same using zipkin executable jar.
->

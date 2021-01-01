@@ -300,21 +300,21 @@ currency-exchange-rate-service.ribbon.listOfServers=localhost:8000,localhost:800
 [service-name].ribbon.listOfServers=[list of servers]
 
 ## Eureka Naming Server:
----
 
 As Ribbon providing client side load balancing but still you would not have control to add or remove the instances of services 
 flexibly or without touching the code base. 
 Eureka provide flexiblity to hande this situation. Any MS can register it self with Eureka and the other MS can look into naming server to get the
 instance of MS using Eureka client.
 
-Add Below dependency into pom.xml
+- Add Below dependency into pom.xml
 ```xml
 <dependency>
 	<groupId>org.springframework.cloud</groupId>
 	<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 </dependency>
+```
 
-Add below annotation to enable Eureka server n your main class.
+- Add below annotation to enable Eureka server n your main class.
 
 ```java 
 @SpringBootApplication
@@ -327,25 +327,27 @@ public class NetflixEurekaNamingServerApplication {
 }
 ```
 
-Add below configuration into properties file to test the server first time.
+- Add below configuration into application properties file to test the server first time.
 ```properties
 spring.application.name=netfix-eureka-naming-server
 server.port=8761
 ```
-Below properties to register eureka itself with nameself.
-
+- Below properties to register eureka itself with nameself.
+```properties
 eureka.client.register-with-eureka=false
 eureka.client.fetch-registry=false
+```
 
-Add Below dependency into client to register it with eureka.[Eureka Discovery]
-*******************
+- Add Below dependency into client to register it with eureka.[Eureka Discovery]
+```xml
 <dependency>
 	<groupId>org.springframework.cloud</groupId>
 	<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 </dependency>
+```
 
-Add "@EnableDiscoveryClient" to enable the nameserver discovery.
-********************************
+- Add "@EnableDiscoveryClient" to enable the nameserver discovery.
+
 ```java 
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -356,9 +358,11 @@ public class CurrencyConversionServiceApplication {
 	}
 }
 ```
-Add below configuration in application.property file.
-*******************
+
+- Add below configuration in application.property file.
+```properties
 eureka.client.service-url.default-zone=http://localhost:8761/eureka
+```
 
 To talk to other services just use Ribbon and Feign with service name and it will work like pro... :)
 Also comment the "currency-exchange-rate-service.ribbon.listOfServers" if there is any in applicaiton.properties.

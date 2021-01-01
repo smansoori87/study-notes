@@ -44,5 +44,3 @@ It also marks the class as a BootStrap class, which means you can run it as a no
 This will start the embedded server that comes along with Spring Boot and runs your web application inside it. Once you see the log without any errors, you can go to the browser and open the localhost with the server port to access your Spring Boot application.
 
 That's all about the @SpringBootApplication annotation and a simple application to demonstrate how to use it. As I said, this nice little annotation packs quite a lot of punch. You can just write this one line of code to enable Java-based configuration, component scanning, and to enable the auto-configuration feature of Spring Boot. It makes your code more readable.
-
-

@@ -299,9 +299,8 @@ Make the below changes in bootstrap.properties file
 currency-exchange-rate-service.ribbon.listOfServers=localhost:8000,localhost:8001
 [service-name].ribbon.listOfServers=[list of servers]
 
-----------------------------------------------------------------------------------------
----------------------------------Eureka Naming Server:-------------------------------------------------------
-
+## Eureka Naming Server:
+---
 
 As Ribbon providing client side load balancing but still you would not have control to add or remove the instances of services 
 flexibly or without touching the code base. 
@@ -309,14 +308,14 @@ Eureka provide flexiblity to hande this situation. Any MS can register it self w
 instance of MS using Eureka client.
 
 Add Below dependency into pom.xml
-*******************
+```xml
 <dependency>
 	<groupId>org.springframework.cloud</groupId>
 	<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 </dependency>
 
 Add below annotation to enable Eureka server n your main class.
-*******************
+
 ```java 
 @SpringBootApplication
 @EnableEurekaServer
@@ -327,13 +326,14 @@ public class NetflixEurekaNamingServerApplication {
 	}
 }
 ```
+
 Add below configuration into properties file to test the server first time.
-*******************
+```properties
 spring.application.name=netfix-eureka-naming-server
 server.port=8761
-
+```
 Below properties to register eureka itself with nameself.
-**********
+
 eureka.client.register-with-eureka=false
 eureka.client.fetch-registry=false
 

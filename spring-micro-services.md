@@ -222,8 +222,8 @@ public class CurrencyConversionController {
 	}
 }
 ```
-----------------------------------------------------------------------------------------
-------------------------------------Spring Feign:---------------------------------------------------
+
+## Spring Feign Client:
 
 -Its helps and simplify the process to invoke the server to server rest communication.
 -Also its provide the important component called Ribbon that is client side load balancer.
@@ -235,7 +235,7 @@ public class CurrencyConversionController {
 	<artifactId>spring-cloud-starter-openfeign</artifactId>
 </dependency>
 ```
-> Use below annotation to mark your application to read the feign class paths.
+- Use below annotation to mark your application to read the feign class paths.
 ```java 
 @SpringBootApplication
 @EnableFeignClients("com.cs.feign")
@@ -246,7 +246,8 @@ public class CurrencyConversionServiceApplication {
 	}
 }
 ```
->To read other microservice data use below annotations.
+- To read other microservice data use below annotations.
+
 ```java 
 @FeignClient(name = "currency-exchange-rate-service", url = "localhost:8000")
 public interface ExchangeRateControllerProxy {
@@ -255,7 +256,7 @@ public interface ExchangeRateControllerProxy {
 	public CurrencyConverterBean currencyExchange(@PathVariable String from, @PathVariable String to);
 }
 ```
->How to use the same.
+- How to use the same.
 ```java 
 @GetMapping("/currency-conversion-feign/api/v1/from/{from}/to/{to}/quantity/{quantity}")
 public CurrencyConverterBean currencyConverterFeign(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity) {
@@ -266,9 +267,7 @@ public CurrencyConverterBean currencyConverterFeign(@PathVariable String from, @
 			Integer.valueOf(env.getProperty("local.server.port")));
 }
 ```
-----------------------------------------------------------------------------------------
---------------------------------------Spring Ribbon:--------------------------------------------------
-
+## Spring Ribbon:
 
 As Feign made developer life easier by providing the proxy interface for MS to MS communication, Still there is issue as it cant hadle multiple
 instances of same microservice. and the same will become the bottleneck for scalability.
@@ -282,8 +281,9 @@ Dependency needs to be added in pom.xml
 	<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
 </dependency>
 ```
-Create Proxy class as below:
-----------------
+
+### Create Proxy class as below:
+
 ```java 
 @FeignClient(name = "currency-exchange-rate-service")
 @RibbonClient(name="currency-exchange-rate-service")
@@ -294,8 +294,8 @@ public interface ExchangeRateControllerProxy {
 	encyExchange(@PathVariable("from") String from, @PathVariable("to") String to);
 }
 ```
-Make the below changes in bootstrap.properties file
------------------
+### Make the below changes in bootstrap.properties file
+
 currency-exchange-rate-service.ribbon.listOfServers=localhost:8000,localhost:8001
 [service-name].ribbon.listOfServers=[list of servers]
 
@@ -383,94 +383,6 @@ Also comment the "currency-exchange-rate-service.ribbon.listOfServers" if there 
 ```properties
 spring.cloud.config.discovery.enabled=true
 ```
-
-## ZUUL - API GateWay
-
-- Front Controller to MS arc. All the calls and request will go through the same gateway.
-- Enable the Nameserver configuration as client.
-
-- Add below dependency into pom.xml to start with ZUUL.
-```xml
-<dependency>
-	<groupId>org.springframework.cloud</groupId>
-	<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-</dependency>
-```
-
-- Add below annotation enable Zuul.
-
-```java 
-@EnableZuulProxy
-@EnableDiscoveryClient
-@SpringBootApplication
-public class NetflixZuulApiGatewayServerApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(NetflixZuulApiGatewayServerApplication.class, args);
-	}
-}
-```
-
-- Create Logging Filter
-
-```java 
-@Component
-public class ZuulLoggingFilter extends ZuulFilter {
-
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	@Override
-	//to enable or disable the filter
-	public boolean shouldFilter() {
-		return true;
-	}
-
-	@Override
-	//business logic at the time of filter
-	public Object run() throws ZuulException {
-		HttpServletRequest request = RequestContext.getCurrentContext().getRequest();
-		logger.info("request->{} request uri->{}", request, request.getRequestURI());
-		return null;
-	}
-
-	@Override
-	//To execute pre post or error condition
-	public String filterType() {
-		return "pre";
-	}
-
-	@Override
-	//priority and sequence of filter
-	public int filterOrder() {
-		return 1;
-	}
-}
-```
-
-- It's must to use the URIs in below format to work with Zuul API GATEWAY.
-```
-/[application-name]/URI
-original : /exchange-rate/api/v1/from/{from}/to/{to}
-with API:/currency-exchange-rate-service/exchange-rate/api/v1/from/{from}/to/{to}
-
-//@FeignClient(name = "currency-exchange-rate-service", url = "localhost:8000")
-//@FeignClient(name = "currency-exchange-rate-service")
-```
-
-```java 
-@FeignClient(name = "netflix-zuul-api-gateway-server")
-@RibbonClient(name="currency-exchange-rate-service")
-public interface ExchangeRateControllerProxy {
-
-	//As using Api gateway, any uri has to append with its application name.
-	//@GetMapping("/exchange-rate/api/v1/from/{from}/to/{to}")
-	@GetMapping("/currency-exchange-rate-service/exchange-rate/api/v1/from/{from}/to/{to}")	
-	public CurrencyConverterBean currencyExchange(@PathVariable("from") String from, @PathVariable("to") String to);
-}
-```
-- The Final URI that will be used to outer world is like below.
-
-http://localhost:8765/currency-conversion-service/currency-conversion-feign/api/v1/from/USD/to/INR/quantity/22
 
 ## Spring Cloud Sleuth
 

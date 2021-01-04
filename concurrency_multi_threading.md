@@ -501,6 +501,12 @@ out future...Sec:8.005
 
 ![callable_problem_3](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/callable_problem_3.JPG)
 
+- from the solution side, async thread should not bother main or caller thread for its response.
+- same is the solution or implemenation as part of completable future. 
+- internally it uses ForkJoinPool and submit the task. 
+- while there is scenario where on return value of one thread we need to perform another action, it can be taken care as a
+ thenApply(Supplier(T)) and if there is no return we are expecting further we can use thenAccept(Consumer(T)).
+ 
 ![callable_solution_1](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/callable_solution_1.JPG)
 
 ## CountDownLatch

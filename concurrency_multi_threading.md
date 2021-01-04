@@ -509,6 +509,42 @@ out future...Sec:8.005
  
 ![callable_solution_1](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/callable_solution_1.JPG)
 
+** All Sample Code:
+https://www.baeldung.com/java-completablefuture
+
+```java
+import java.util.concurrent.CompletableFuture;
+
+public class CompletableFutureExam {
+	static int i = 10;
+
+	public static void main(String[] args) {
+
+		CompletableFuture.supplyAsync(() -> calculatePlus(i)).thenApply(num -> calculateMul(num))
+				.thenApply(num -> calculateDivision(num)).thenAccept(num -> printNum(num));
+	}
+
+	private static int calculateDivision(int num) {
+		printNum(num);
+		return num / 10;
+	}
+
+	private static int calculatePlus(int num) {
+		printNum(num);
+		return num + 10;
+	}
+
+	private static int calculateMul(int num) {
+		printNum(num);
+		return num * 10;
+	}
+
+	private static void printNum(int num) {
+		System.out.println("Thread: " + Thread.currentThread().getName() + ", :num: " + num);
+	}
+}
+```
+
 ## CountDownLatch
 - A synchronization aid that allows one or more threads to wait until a set of operations being performed in other threads completes. 
 - A CountDownLatch is initialized with a given count. The await methods block until the current count reaches zero due to invocations of the countDown method, after which all waiting threads are released and any subsequent invocations of await return immediately. 

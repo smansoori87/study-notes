@@ -490,6 +490,19 @@ User Data: 2
 out future...Sec:8.005
 ```
 
+## Completable Future
+- So there are certain limitation with callable. 
+- while submitting multiple jobs using Executor frameworks, main thread will be in waiting stage if it will call get method on future object.
+- As can see in below flow, while invoking get method main thread is in blocking state untill future get will not return the value,
+
+![callable_problem_1](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/callable_problem_1.JPG)
+
+![callable_problem_2](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/callable_problem_2.JPG)
+
+![callable_problem_3](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/callable_problem_3.JPG)
+
+![callable_solution_1](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/callable_solution_1.JPG)
+
 ## CountDownLatch
 - A synchronization aid that allows one or more threads to wait until a set of operations being performed in other threads completes. 
 - A CountDownLatch is initialized with a given count. The await methods block until the current count reaches zero due to invocations of the countDown method, after which all waiting threads are released and any subsequent invocations of await return immediately. 

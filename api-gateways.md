@@ -1,4 +1,4 @@
-# ZUUL - API GateWay
+# ZUUL - API Gateway
 
 - Front Controller to MS arc. All the calls and request will go through the same gateway.
 - Enable the Nameserver configuration as client.

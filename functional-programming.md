@@ -67,6 +67,9 @@ public int getSum(int a, int b){
 > Terminal Operation: Only one terminal operation is allowed.
 - count, max, min, reduce
 
+> Stream Examples
+https://www.youtube.com/watch?v=t1-YZ6bF-g0
+
 ![Stream](https://github.com/smansoori87/study-notes/blob/master/images/functional-programming/stream-1.JPG)
 
 

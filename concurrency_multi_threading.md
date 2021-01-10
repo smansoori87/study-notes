@@ -918,6 +918,9 @@ It is concrete implementation for parallel execution.
 #### Join Activity
 ![join_1](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/join_1.JPG)
 
+#### Study Example and Theory
+https://www.baeldung.com/java-fork-join
+
 #### SimpleRecurivAction Example:
 ```java
 Compute Logic:

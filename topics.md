@@ -77,10 +77,10 @@
 	- Actuator
 	- ELK
 	
-Angular/React
- - High Level
+- Angular/React
+ 	- High Level
  
--JWT
--Spring Security Oauth
-	-Authentication
-	-Authrization
+- Spring Security Oauth
+	- Authentication
+	- Authrisation
+	- JWT

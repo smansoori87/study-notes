@@ -155,4 +155,19 @@ https://dzone.com/articles/design-patterns-for-microservices
 - Most people consider this an anti-pattern for microservices, but for brownfield applications, this is a good start to break the application into smaller logical pieces.
 - but it has to be restricted to 2-3 maximum, otherwise scaling, autonomy, and independence will be challenging to execute.
 
-##  
+## CQRS (Command Query Responsibility Segregation )
+- Mainly to segregate the reponsibility of Command(Create, Update, Delete) and Query(Reading) the data.
+- Segregate the data for Read and Write operations.
+- Ex: https://www.youtube.com/watch?v=hrmeeCEqzo8
+
+## SAGA
+- way to manage transactions in distributed system. 
+- In case there are multiple services and way they are related/depend on each other process, Saga gives the flexibility as implementation.
+
+> there are 2 different way in Saga to handle the above scenarios.
+- 1. Choreography: All service will connect throughmessage brokers and listin based on event.
+		- Only suitable if there are minimal service.
+- 2. Orchestration: It is required a cordinator service which will take the responsibilty to manage all the services in transaction.
+		- in case if one service fail, manager service will take the responsibility to give instruction to other services to rollback there previos changes.
+		
+## 

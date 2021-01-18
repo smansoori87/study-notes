@@ -109,3 +109,50 @@ public abstract class Algo{
 ## Visitor Pattern
 
 
+
+# Microservice Design Pattern
+
+https://dzone.com/articles/design-patterns-for-microservices
+
+## Domain Driven Design:
+- Divide the whole application into logical domains arround the bounded context. 
+- An example there is Wallet Applicaiton like Phonepe or Paytm
+	- Scan and process QR
+	- Pay to wallet
+	- Pay to Merchant linked bank account
+	- accounts(CC/DB/net banking)
+	- Adding money in wallet
+	- Billing service(recharge, electric bill, gas bill, water bill
+	- Wallet: Balance(), Add Money(), Payment
+	- Merchants: merchant related 
+	- User: User details, update
+	- 
+
+## Strangler:
+- Best suit to support the monolith to microservice journey. 
+- This solution works well with web applications, where a call goes back and forth, and for each URI call, a service can be broken into different domains and hosted as separate services. The idea is to do it one domain at a time.
+- passthrough services. from main application to individual domains.
+
+## API Gateway Pattern:
+- basic pillers of microservice architecture, where API Gateway will act as front controller for any incoming request and sharing the responsibility of cross cutting concerns like  Authentication, Authraziation, protocol conversion.
+
+## Aggregator Pattern:
+- 1. A composite microservice will make calls to all the required microservices, consolidate the data, and transform the data before sending back.
+- 2. An API Gateway can also partition the request to multiple microservices and aggregate the data before sending it to the consumer.
+- It is recommended if any business logic is to be applied, then choose a composite microservice. Otherwise, the API Gateway is the established solution.
+
+## Client-Side UI Composition Pattern
+- With microservices, the UI has to be designed as a skeleton with multiple sections/regions of the screen/page. Each section will make a call to an individual backend microservice to pull the data.
+- These screens are known as Single Page Applications (SPA). This enables the app to refresh a particular region of the screen instead of the whole page.
+
+## Database per Service
+- To solve the above concerns, one database per microservice must be designed; it must be private to that service only. 
+	It should be accessed by the microservice API only. It cannot be accessed by other services directly. For example,
+ 	for relational databases, we can use private-tables-per-service, schema-per-service, or database-server-per-service
+ 	
+## Shared Database per Service
+- if the application is a monolith and trying to break into microservices, denormalization is not that easy. What is the suitable architecture in that case?
+- Most people consider this an anti-pattern for microservices, but for brownfield applications, this is a good start to break the application into smaller logical pieces.
+- but it has to be restricted to 2-3 maximum, otherwise scaling, autonomy, and independence will be challenging to execute.
+
+##  

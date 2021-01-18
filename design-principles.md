@@ -108,8 +108,19 @@ public abstract class Algo{
 
 ## Visitor Pattern
 
+--
+# ACID:
+
+## Atomic:
+
+## Consistancy:
+
+## Isolation
+
+## Durability
 
 
+--
 # Microservice Design Pattern
 
 https://dzone.com/articles/design-patterns-for-microservices
@@ -156,7 +167,7 @@ https://dzone.com/articles/design-patterns-for-microservices
 - but it has to be restricted to 2-3 maximum, otherwise scaling, autonomy, and independence will be challenging to execute.
 
 ## CQRS (Command Query Responsibility Segregation )
-- Mainly to segregate the reponsibility of Command(Create, Update, Delete) and Query(Reading) the data.
+- Mainly to segregate the responsibility of Command(Create, Update, Delete) and Query(Reading) the data.
 - Segregate the data for Read and Write operations.
 - Ex: https://www.youtube.com/watch?v=hrmeeCEqzo8
 
@@ -170,4 +181,15 @@ https://dzone.com/articles/design-patterns-for-microservices
 - 2. Orchestration: It is required a cordinator service which will take the responsibilty to manage all the services in transaction.
 		- in case if one service fail, manager service will take the responsibility to give instruction to other services to rollback there previos changes.
 		
-## 
+## Observability Patternr
+- Log Agrigation
+- Distributed Tracing
+- Performance Monitor
+- Health Check
+
+## Cross Cutting Concern Pattern
+- Circit Breaker
+- Name Server or Registry Server
+- External Config
+- Blue Green Deployment
+- 

@@ -57,7 +57,7 @@ https://www.youtube.com/watch?v=Z_ySH41NmUQ
 # Behavioral Design Patterns
 
 ## Strategy Pattern:
-- Keep the code changes from the code will remain same.
+- Keep the code changes away from the code will remain same.
 - Program through interfaces or abstract classes not through concrete implementations.
 - Use compositions over inheritance consume the behaviors or has a relationship over is-a relationship.
 
@@ -108,16 +108,54 @@ public abstract class Algo{
 
 ## Visitor Pattern
 
+#
+
 --
 # ACID:
 
-## Atomic:
+## Atomic: 
+- Either all the steps involved in transaction executes or none of them will execute.
 
-## Consistancy:
+## Consistency:
+- While dealing with multiple transactions, if 2 transactions are related to each other in such case there should be any differences in relative data after and before the transaction.
+- While doing the development as part of developer responsibility if A/I/D is managged in correct manner then C is auto achivable.
+-Ex: If T1 and T2 in transaction and updating or transferring fund to each other then the sum of both account post and pre transaction should remain same.
 
 ## Isolation
+- Transactions are in isolation when they are not related to each other. It means T1 and T2 not impacting each other when they are running in parallel.
 
 ## Durability
+- Changes or data in system should be durable, irrespective of Hardware or Software failure.
+---
+
+# CAP:
+
+## Consistency:
+- In distributed system, If there are multiple nodes connected to each other, at any point of time writing data at one node and reading data from other node should give the same result. 
+
+## Availability:
+- For each request from client system should respond in defined time limit irrespective of any conditions.
+
+## Partition Tolerance:
+- If any node is failed in system, it should not fail the system and the remaining nodes in system should be able to manage all the client request.
+
+### CA, CP, AP
+
+## CA: 
+- System will be in CA if it support Consistency and Availability at same time.
+- It is the case when there is one node system and only responsible for read and write operations.
+- Ex: All RDMS like mySql, MariaDb, Db2 runs in CA mode.
+
+## CP: 
+- If nodes in cluster are arranged in Master slave pattern and only one node will take the responsibility of Read and write operations.
+- 'A' is not possible in above arrangement because if Master node failed then cluster will take some time to elect new master node and system will be unavailable for that period of time.
+- Ex: 
+
+## AP:
+- If nodes in cluster are arranged in a way that each node can participate in read and write operations.
+- 'C' is missing because in above arrangement, there is surely a time difference between nodes to get in sync with data. and during that period read immediate after write may give inconsistent behaviour. 
+- Ex:
+
 
 
 --

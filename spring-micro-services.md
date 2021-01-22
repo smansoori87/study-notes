@@ -416,3 +416,8 @@ public Sampler defaultSampler() {
 ## Zipkin
 >Spring Finchley.M3 onwards, due to compatability issue with Sleuth, Spring-boot removed zipkin from stack.
 >There is way to use indipendently the same using zipkin executable jar.
+
+## Additional Topics:
+- Spring-retry
+- Ribbon Client side load balancing @LoadBalancing
+- @Iping to validate connected service health.

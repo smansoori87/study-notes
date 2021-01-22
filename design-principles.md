@@ -84,6 +84,8 @@ https://howtodoinjava.com/design-patterns/behavioral/observer-design-pattern/
 - Invoker : Switcher class, Holding the list of commands and executing the interface execute method without bothering about the implementation.
 - Client  : Source of request.
 
+Ex: Dispatcher Servlet serving request.
+
 ## Template Pattern
 - Abstract class exposes the defined way / template to execute its methods.
 - Subclasses can override the methods as per need but the invocation will remain in same way as defined in template.
@@ -149,12 +151,12 @@ public abstract class Algo{
 ## CP: 
 - If nodes in cluster are arranged in Master slave pattern and only one node will take the responsibility of Read and write operations.
 - 'A' is not possible in above arrangement because if Master node failed then cluster will take some time to elect new master node and system will be unavailable for that period of time.
-- Ex: 
+- Ex: Redis
 
 ## AP:
 - If nodes in cluster are arranged in a way that each node can participate in read and write operations.
 - 'C' is missing because in above arrangement, there is surely a time difference between nodes to get in sync with data. and during that period read immediate after write may give inconsistent behaviour. 
-- Ex:
+- Ex: Cassandra
 
 
 

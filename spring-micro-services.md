@@ -1,14 +1,3 @@
-   
-
-## hystrix 
-***********Spring MS************
-
-- How to use Hystrix with timeout configuration.
-https://medium.com/@aksudupa11/getting-started-with-hystrix-e454158f2867
-
-- How to supply parameters in Fallback API
-https://stackoverflow.com/questions/52382160/how-to-pass-data-from-business-method-to-fallback-method-while-using-spring-boot
-
 [Best-Practices-For-Better-Restful-api](
 https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/)
 
@@ -427,3 +416,12 @@ public Sampler defaultSampler() {
 - Spring-retry
 - Ribbon Client side load balancing @LoadBalancing
 - @Iping to validate connected service health.
+
+## hystrix 
+**Spring MS
+
+- How to use Hystrix with timeout configuration.
+https://medium.com/@aksudupa11/getting-started-with-hystrix-e454158f2867
+
+- How to supply parameters in Fallback API
+https://stackoverflow.com/questions/52382160/how-to-pass-data-from-business-method-to-fallback-method-while-using-spring-boot

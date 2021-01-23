@@ -75,3 +75,4 @@ public class SpringRestServicesApplication {
 - Imp Links:
 	- https://www.baeldung.com/spring-boot-evict-cache
 	- https://www.journaldev.com/18141/spring-boot-redis-cache
+	- https://mashhurs.wordpress.com/2020/03/26/jedis-vs-lettuce-java-redis-clients/

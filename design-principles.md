@@ -109,8 +109,30 @@ public abstract class Algo{
 - design to validate null objects.
 
 ## Visitor Pattern
+- Design pattern to isolate the data model with business components.
 
-#
+
+# Structural Design Pattern:
+## Proxy Pattern
+- Hide the main entity from the outside world.
+- Ex: API Gateway
+> https://www.javatpoint.com/proxy-pattern
+
+## Decorator Pattern
+- if there is need to provide the additional behaviour on top of vanilla impl of any interface.
+- Ex: 
+> If there is Interface FundTranser with transfer();
+> Default Impl to transfer fund locally when country code is IN.
+> In case of Overseas fund transfer, Will create another Impl with Default fund transfer behavior.
+> Additional behavior will be like service fees or charges on top of actual fund transfer. 
+> https://www.javatpoint.com/decorator-pattern
+
+## Composite Design
+- Where there is a tree structure kind of format need to build and all nodes representing some common structure.
+- Ex: An example a Transaction History, were there will be N number of different transactions but all are part of Root Transaction, and holding common behaviours like amount, shop person, trans id.
+-https://www.youtube.com/watch?v=Q1jZ4TI6MF4
+
+## 
 
 --
 # ACID:

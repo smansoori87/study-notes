@@ -1,5 +1,11 @@
 # Spring Boot Redis
+- redis can be used as a DB, Cache and MQ.
+- in below example we are seeing how to use Redis as cache
 
+- Below is the anotaion to define entity object in case of Redis using as a DB storage.
+```java
+	@RedisHash("Entity Name which will be used as a table object in Redis").
+```
 ## How to use Redis inside Spring Boot Project?
 
 ### Dependencies

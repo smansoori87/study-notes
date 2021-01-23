@@ -9,6 +9,12 @@
 ## How to use Redis inside Spring Boot Project?
 
 ### Dependencies
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+```
 - Jedis is the Redis implementation for Java
 - spring-boot-starter-data-redis
 	- Internally parent used to manage "spring-data-redis" and "jedis" as dependency as part of parent project.

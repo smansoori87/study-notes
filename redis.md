@@ -46,8 +46,20 @@ public RedisTemplate redisTemplate(LettuceConnectionFactory redisConnectionFacto
 }
 ``` 
 - Use case:
-- Use @EnableCaching at Spring Applicaiton, along with @SpringBootApplcaiton
+- Use @EnableCaching
+```java
+@SpringBootApplication
+@EnableCaching
+public class SpringRestServicesApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringRestServicesApplication.class, args);
+	}
+
+}
+```
 - Use below annotations to cache, update or delete the data.
+
 - Insert data in cache while returning the result. where Users is the Group or Cache Table. and userId is Key to access User Object.
 ```java
 @Cacheable(value = "users", key = "#userId", unless = "#result.followers < 12000")

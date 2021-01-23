@@ -132,6 +132,6 @@ public void listenGroupFoo(String message) {
 ```
 
 - Imp Link:
-> https://www.baeldung.com/spring-kafka 
-> Producer: https://www.youtube.com/watch?v=NjHYWEV_E_o
-> Consumer: https://www.youtube.com/watch?v=IncG0_XSSBg
+	- https://www.baeldung.com/spring-kafka 
+	- Producer: https://www.youtube.com/watch?v=NjHYWEV_E_o
+	- Consumer: https://www.youtube.com/watch?v=IncG0_XSSBg

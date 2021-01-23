@@ -58,7 +58,7 @@ public class SpringRestServicesApplication {
 
 }
 ```
-- Use below annotations to cache, update or delete the data.
+- Use below annotations to cache, update or delete the data at Controller, Service or Repository layer on top of respective methods.
 
 - Insert data in cache while returning the result. where Users is the Group or Cache Table. and userId is Key to access User Object.
 ```java

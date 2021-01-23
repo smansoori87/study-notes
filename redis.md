@@ -4,7 +4,7 @@
 
 - Below is the anotaion to define entity object in case of Redis using as a DB storage.
 ```java
-	@RedisHash("Entity Name which will be used as a table object in Redis").
+@RedisHash("Entity Name which will be used as a table object in Redis").
 ```
 ## How to use Redis inside Spring Boot Project?
 

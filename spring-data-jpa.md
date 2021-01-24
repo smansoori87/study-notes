@@ -65,5 +65,37 @@ We can use this annotation to mark a field in a model class as transient. Hence 
 ## Repository
 ```java
 - Create @Repository and Extend JpaRepository<<EntityClass>, <PrimaryKeyType>>
-- 
+
+- findOne(String id): Will return uniq record based on primary key
+- findByName(String name):
+
+- findByNameAndLastName(String name, String lastname)
+- findByNameOrLastName(String name, String lastname)
+
+- findByAliveTrue(), findByAliveFalse(): This is boolean check and no need to supply any parameter.
+
+- findByNameNull(): No need any parameter
+- findBtNameNotNull()
+
+- findByAgeLessThan(int age)
+- findByAgeLessThanEqual(int age)
+- findByAgeGreaterThan(int age)
+- findByAgeGreaterThanEqual(int age)
+
+- findByNameLike(String name): In either case like queries, developer need to supply the wild cards alongg with data.
+- findByNameNotLike(String name)
+- findByNameContains(String name)
+
+- findByCompanyIn(List<String> companies);
+- findByCompanyNotIn(List<String> companies);
+
+- findByFirstNameOrderByLastNameAsc(String firstName);
+- findByFirstNameOrderByLastNameDesc(String firstName);
+
+- findFirstByFirstName(String firstName);
+- findTop10ByFirstName(String firstName);
+- findDistinctByFirstName(String firstName);
+
+
+ 
 ``` 

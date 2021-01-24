@@ -92,29 +92,29 @@ http://localhost:8765/currency-conversion-service/currency-conversion-feign/api/
 - Below are the dependencies while creating Spring-Api-Gateway project.
 - Spring-Reactive-Web is the dependency to load gateway UI as spring gateway uses react for UI.
 
-![spring-api-gateway-dependency](https://github.com/smansoori87/study-notes/blob/master/images/spring-api-gateway/spring-api-gateway-dependency.jpg)
+![spring-api-gateway-dependency](images/spring-api-gateway/spring-api-gateway-dependency.jpg)
 
 - Below are the properties to enable gateway and register itself with name/discovery server.
 - lower-case-service-id need to set true in case using client service instance name in lower case. without this property it is must to use in capital letter which is very uncommon in case of any URI.
 
-![spring-api-gateway-config](https://github.com/smansoori87/study-notes/blob/master/images/spring-api-gateway/spring-api-gateway-config.jpg)
+![spring-api-gateway-config](images/spring-api-gateway/spring-api-gateway-config.jpg)
 
 - To add URL rewriting or route configuration using predicates, filters, below is the configuration.
 
-![spring-api-gateway-uri_config](https://github.com/smansoori87/study-notes/blob/master/images/spring-api-gateway/spring-api-gateway-uri_config.jpg)
+![spring-api-gateway-uri_config](images/spring-api-gateway/spring-api-gateway-uri_config.jpg)
 
 - To call configured URI from gateway below is the path.
 - http://localhost:8082 is API gateway address.
 
-![spring-api-gateway-uri_call](https://github.com/smansoori87/study-notes/blob/master/images/spring-api-gateway/spring-api-gateway-uri_call.jpg)
+![spring-api-gateway-uri_call](images/spring-api-gateway/spring-api-gateway-uri_call.jpg)
 
 - URI rewriting manual
 
-![spring-api-gateway-uri_re-write_1](https://github.com/smansoori87/study-notes/blob/master/images/spring-api-gateway/spring-api-gateway-uri_re-write_1.jpg)
+![spring-api-gateway-uri_re-write_1](images/spring-api-gateway/spring-api-gateway-uri_re-write_1.jpg)
 
 - URI rewriting with regular expression, seggment based.
 
-![spring-api-gateway-uri_re-write_2](https://github.com/smansoori87/study-notes/blob/master/images/spring-api-gateway/spring-api-gateway-uri_re-write_2.jpg)
+![spring-api-gateway-uri_re-write_2](images/spring-api-gateway/spring-api-gateway-uri_re-write_2.jpg)
 
 ### Build-In Predicate Factories
 

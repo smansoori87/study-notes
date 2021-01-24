@@ -15,11 +15,11 @@ By the way, this annotation is available from Spring 1.2 onwards, which means th
 ## @SpringBootApplication Example
 Here is a simple example of how to write a Spring Boot application using the @SpringBootApplication annotation.
 
-![Spring-Boot](https://github.com/smansoori87/study-notes/blob/master/images/spring-boot/spring-boot.JPG)
+![Spring-Boot](images/spring-boot/spring-boot.JPG)
 
 The Main class serves two purposes in a Spring Boot application: configuration and bootstrapping. First, it's the main Spring configuration class and second, it enables the auto-configuration feature of a Spring Boot application.
 
-![Spring-Boot](https://github.com/smansoori87/study-notes/blob/master/images/spring-boot/spring-boot-configuration.JPG)
+![Spring-Boot](images/spring-boot/spring-boot-configuration.JPG)
 
 ### @SpringBootApplication = @Configuration + @ComponentScan + @EnableAutoConfiguration
 The @SpringBootApplication annotation is a combination of following three Spring annotations and provides the functionality of all three with just one line of code.
@@ -39,7 +39,7 @@ So, you can say that @SpringBootApplication is a 3-in-1 annotation that combines
 
 It also marks the class as a BootStrap class, which means you can run it as a normal Java class, e.g. by running its JAR file from the command prompt as shown here, or just right-clicking and running it as a Java program in Eclipse IDE.
 
-![Spring-Boot-App-Run](https://github.com/smansoori87/study-notes/blob/master/images/spring-boot/spring-boot-app-run.JPG)
+![Spring-Boot-App-Run](images/spring-boot/spring-boot-app-run.JPG)
 
 This will start the embedded server that comes along with Spring Boot and runs your web application inside it. Once you see the log without any errors, you can go to the browser and open the localhost with the server port to access your Spring Boot application.
 

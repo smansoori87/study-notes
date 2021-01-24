@@ -3,7 +3,7 @@
 ## Annotations
  https://www.adevguide.com/all-spring-annotations-cheat-sheet/
  
-- 	![spring-life](https://github.com/smansoori87/study-notes/blob/master/images/spring/bean-life-cycle.JPG)
+- 	![spring-life](images/spring/bean-life-cycle.JPG)
 
 
 - @Configuration: To define any class as config class in spring to create beans and register them in container.

@@ -267,7 +267,7 @@ https://winterbe.com/posts/2015/04/30/java8-concurrency-tutorial-synchronized-lo
 
 # Executor Framework
 ---
-![Executor_Framework_Interface](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/executor_framework_interface.png)
+![Executor_Framework_Interface](images/concurrency/executor_framework_interface.png)
 
 
 Executor framework is to use threads as service. There are many different implementation of Executor are available.
@@ -495,11 +495,11 @@ out future...Sec:8.005
 - while submitting multiple jobs using Executor frameworks, main thread will be in waiting stage if it will call get method on future object.
 - As can see in below flow, while invoking get method main thread is in blocking state untill future get will not return the value,
 
-![callable_problem_1](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/callable_problem_1.JPG)
+![callable_problem_1](images/concurrency/callable_problem_1.JPG)
 
-![callable_problem_2](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/callable_problem_2.JPG)
+![callable_problem_2](images/concurrency/callable_problem_2.JPG)
 
-![callable_problem_3](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/callable_problem_3.JPG)
+![callable_problem_3](images/concurrency/callable_problem_3.JPG)
 
 - from the solution side, async thread should not bother main or caller thread for its response.
 - same is the solution or implemenation as part of completable future. 
@@ -507,7 +507,7 @@ out future...Sec:8.005
 - while there is scenario where on return value of one thread we need to perform another action, it can be taken care as a
  thenApply(Supplier(T)) and if there is no return we are expecting further we can use thenAccept(Consumer(T)).
  
-![callable_solution_1](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/callable_solution_1.JPG)
+![callable_solution_1](images/concurrency/callable_solution_1.JPG)
 
 ** All Sample Code:
 https://www.baeldung.com/java-completablefuture
@@ -857,7 +857,7 @@ Thread-2 :takeNum: User [id=5, name=Wishly]
 ```
 
 ## ConcurretMap
-![Concurrent_Hashmap](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/concurrent-hashmap.jpg)
+![Concurrent_Hashmap](images/concurrency/concurrent-hashmap.jpg)
 - The underlined data structure for ConcurrentHashMap is Hashtable.
 - ConcurrentHashMap class is thread-safe i.e. multiple threads can operate on a single object without any complications.
 - At a time any number of threads are applicable for a read operation without locking the ConcurrentHashMap object which is not there in HashMap.
@@ -907,16 +907,16 @@ public V exchange(V x, long timeout, TimeUnit unit) throws InterruptedException,
 It is concrete implementation for parallel execution.
 
 #### Fork-Join Framework
-![fork-join-framework_1](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/fork-join-framework_1.JPG)
+![fork-join-framework_1](images/concurrency/fork-join-framework_1.JPG)
 
 #### ForkJoinTask extensions
-![fork-join-framework_2](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/fork-join-framework_2.JPG)
+![fork-join-framework_2](images/concurrency/fork-join-framework_2.JPG)
 
 #### Fork Activity
-![fork_1](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/fork_1.JPG)
+![fork_1](images/concurrency/fork_1.JPG)
 
 #### Join Activity
-![join_1](https://github.com/smansoori87/study-notes/blob/master/images/concurrency/join_1.JPG)
+![join_1](images/concurrency/join_1.JPG)
 
 #### Study Example and Theory
 https://www.baeldung.com/java-fork-join

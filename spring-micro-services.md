@@ -362,7 +362,7 @@ eureka.client.service-url.default-zone=http://localhost:8761/eureka
 ```
 
 - Below configuration to assign each service node with unique id and port.
-![Spring-Boot](https://github.com/smansoori87/study-notes/blob/master/images/spring-boot/spring-boot-instance-config.JPG) 
+![Spring-Boot](images/spring-boot/spring-boot-instance-config.JPG) 
 
 To talk to other services just use Ribbon and Feign with service name and it will work like pro... :)
 Also comment the "currency-exchange-rate-service.ribbon.listOfServers" if there is any in applicaiton.properties.

@@ -3,7 +3,7 @@
 
 -![spring-data-pic](images/spring-data-jpa/spring-data-pic.JPG)
 
-- Dependencies:
+## Dependencies:
 ```xml
 <dependency>
    <groupId>org.springframework.boot</groupId>
@@ -25,5 +25,24 @@
 </dependency>
 ```
 
+## Entity
 
- 
+```java
+@Entity:
+
+@Table
+
+@Id
+
+@Column
+
+
+
+```
+
+## Repository
+```java
+- Create @Repository and Extend JpaRepository<<EntityClass>, <PrimaryKeyType>>
+
+- 
+``` 

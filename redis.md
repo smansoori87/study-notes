@@ -38,9 +38,11 @@ public RedisTemplate redisTemplate(LettuceConnectionFactory redisConnectionFacto
 //All Serializers are in place to store data in readable format in Redis.
     template.setKeySerializer(new PrefixRedisSerializer());
     template.setValueSerializer(new StringRedisSerializer());
-    template.setConnectionFactory(redisConnectionFactory);
     template.setHashKeySerializer(new StringRedisSerializer());
     template.setHashValueSerializer(new StringRedisSerializer());
+    
+    template.setConnectionFactory(redisConnectionFactory);
+    
     template.afterPropertiesSet();
     return template;
 }

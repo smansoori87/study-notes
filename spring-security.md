@@ -5,19 +5,12 @@
 
 ![spring-security-arch](images/spring-security/spring-security-arch.JPG)
 
-## Dependency:
+## Dependency: Authentication and Authrization
 ```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-security</artifactId>
     <version>2.4.2</version>
-</dependency>
-
-<!-- Dependency to support JWT -->
-<dependency>
-    <groupId>io.jsonwebtoken</groupId>
-    <artifactId>jjwt</artifactId>
-    <version>0.9.1</version>
 </dependency>
 ```
 
@@ -25,28 +18,37 @@
 - Enabling the web security and binding the User details object to fetch the user details.
  
 ```java
-@Configuration
-@EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
-	
-	//Class must implement UserDetailsService
-	//This class to fetch the user details based on user name from DB Repo.
-	@Autowired
-	CustomUserDetailService customUserDetailService;
-	
-	@Override
+Imp Classes and annotations:
+
+@EnableWebSecurity: to enable web spring security.
+
+// Class to define the Spring security lifecycle methods.
+- SecurityConfigClass extends WebSecurityConfigurerAdapter
+	//Method to Register the UserDetailService to fetch the user from underline systems like DB/LDAP and others.
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(customUserDetailService);
 	}
+	
+	//Method to bind the resource/url matchers, authentication and permissions.
+	protected void configure(HttpSecurity http) throws Exception 
 
-}
 
+//Class to bind the logic to fetch the user details.
+- CustomeUserDetailService implements UserDetailsService
+	- UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 
-
+- Password Encoder: While storing the password in system or authenticating the user, Spring will use the Encoder.
+	- 	BCryptPasswordEncoder is the strong and best one as it does maintain its salt internally.
+	-	@Bean
+		public PasswordEncoder encoder() {
+		    return new BCryptPasswordEncoder();
+		}
+	- https://www.baeldung.com/spring-security-registration-password-encoding-bcrypt
 ```
 
 - CustomUserDetailsService extends the UserDetailsService.
 
+- Example:
 ```java
 @Repository
 public class CustomUserDetailService implements UserDetailsService {

@@ -62,3 +62,49 @@ public class CustomUserDetailService implements UserDetailsService {
 }
 ```
 
+# JWT Creation and Authentication
+
+- Dependency to enable JWT. 
+```xml
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt</artifactId>
+    <version>0.9.1</version>
+</dependency>
+```
+
+```java
+//JWT: <Header><Payload><Signature>
+
+//Methods to create Token, Validate Token
+Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+				.setExpiration(new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 10)))
+				.signWith(SignatureAlgorithm.HS256, "TEST").compact();
+
+- AuthenticationManager.authenticate(new UserNamePasswordAuthenticationToken(username, pwd)) 
+class is required to authenticate the request and post flow will redirected to JWT creation.
+
+//As part of flow first request will get authenticated using above methods, and then will generate the JWT which will be used in subsequent requests within validity duration.
+
+class JwtTokenFilter extends OncePerRequestFilter{
+// This class is to filter the request and authenticate using JWT if it present in request to bypass the userid and pwd based authentication.
+
+	doFilterInternal(req, res){
+		//Inside this method steps are 
+		1. Abstract the JWT from http request.
+		2. Fetch user name JWT using JWTUtil methods.
+		3. Fetch UserDetails from UserDetailsService from downsystems.
+		4. validate the JWT token respect to the UserDetails.
+		5. Validate the user details using UserNamePasswordAuthenticationToken Class.
+		6. If all valid, setting the user details like Role and all into security context.
+		
+		calling filterChain.doFilter(req, res);
+	}
+}
+
+// Register JwtTokenFilter with Authentication filter.
+http.addFilterBefore(jwtTokenFilter, UserNamePasswordAuthenticationFilter.class);
+
+
+```
+

@@ -1,5 +1,8 @@
 # Junit-Jupiter 5 testing with Spring Boot
 
+### Junit Annotations
+- https://devqa.io/junit-5-annotations/
+
 ## PART 1, Unit Testing with JUnit 5 and Mockito
 - https://www.youtube.com/watch?v=--nQfs67zCM
 

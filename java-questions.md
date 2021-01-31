@@ -25,6 +25,7 @@
 - Stack memory is very less compare to Heap Memory.
 
 <img src="images/java/jvm-memory-mgmt.jpg" width="500">
+
 ---
 
 ## Why Wait and Notify is part of Object Class?
@@ -37,6 +38,36 @@ object's monitor are notified that threads can wake up.***
 That's one reason why these methods are in Object class. To reiterate threads wait on an Object's monitor (lock) and 
 notify() is also called on an object to wake up a thread waiting on the Object's monitor.
 
+---
+
+## How to prevent Deadlock in multi-threading ?
+- Avoid Unnecessary Locks: We should use locks only for those members on which it is required. Unnecessary use of locks leads to a deadlock situation. We recommend you to use a lock-free data structure. If possible, keep your code free form locks. For example, instead of using synchronized ArrayList use the ConcurrentLinkedQueue.
+- Avoid Nested Locks: Another way to avoid deadlock is to avoid giving a lock to multiple threads if we have already provided a lock to one thread. Since we must avoid allocating a lock to multiple threads.
+- Using Thread.join() Method: You can get a deadlock if two threads are waiting for each other to finish indefinitely using thread join. If your thread has to wait for another thread to finish, it's always best to use join with the maximum time you want to wait for the thread to finish.
+- Use Lock Ordering: Always assign a numeric value to each lock. Before acquiring the lock with a higher numeric value, acquire the locks with a lower numeric value.
+- Lock Time-out: We can also specify the time for a thread to acquire a lock. If a thread does not acquire a lock, the thread must wait for a specific time before retrying to acquire a lock.
+
+---
+
+## Chain of Responsibility Design:
+- Chain of responsibility pattern is used to achieve loose coupling in software design where a request from the client is passed to a chain of objects to process them. Later, the object in the chain will decide themselves who will be processing the request and whether the request is required to be sent to the next object in the chain or not.
+- An example: Filters in web application arranged in chain and each filter takes the decision wheather request needs to pass to the next or not...
+
+---
+
+## Difference between Request Redirect and Forward
+- Forward will pass the same request to the different resource and URL will remain same at client end.
+- Where Request Redirect or SendRedirect will built a new request and fwd to resource from client end. and hence due to dual round trip it is slower than forward.
+
+--- 
+
+## What is Mutation Testing?
+- code coverage metrics can sometimes be quite ineffective, because a 100% code coverage score only means that all lines were exercised at least once, but it says nothing about tests accuracy or use-cases completeness, and that's why mutation testing actually matters.
+- Mutation testing is a testing technique used to improve the adequacy of tests and identify defects in code. 
+- ***The idea is to change the production code dynamically and cause the tests to fail.***
+- ***Good tests shall fail***
+- Each change in the code is called a mutant, and it results in an altered version of the program, called a mutation.
+- We say that the mutation is killed if it can cause a fail in the tests. We also say that the mutation survived if the mutant couldn't affect the behavior of the tests. 
 ---
 
 ## 

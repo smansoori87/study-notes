@@ -28,9 +28,9 @@
 ## Why Wait and Notify is part of Object Class?
 - wait - wait method tells the current thread to give up monitor(Key) and go to sleep.
 - notify - Wakes up a single thread that is waiting on this object's monitor. 
-- So you see wait() and notify() methods work at the monitor level, thread which is currently holding the monitor is asked 
+- ***So you see wait() and notify() methods work at the monitor(Key) level, thread which is currently holding the monitor is asked 
 to give up that monitor through wait() method and through notify method (or notifyAll) threads which are waiting on the 
-object's monitor are notified that threads can wake up.
+object's monitor are notified that threads can wake up.***
 - Important point to note here is that monitor is assigned to an object not to a particular thread. 
 That's one reason why these methods are in Object class. To reiterate threads wait on an Object's monitor (lock) and 
 notify() is also called on an object to wake up a thread waiting on the Object's monitor.

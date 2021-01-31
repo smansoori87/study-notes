@@ -1,17 +1,17 @@
 ## Memory Architecture in Java:
-- Partitions
-	- Heap: holding all the objects. All JRE classes and objects will be in Heap
+- **Partitions**
+	- **Heap:** holding all the objects. All JRE classes and objects will be in Heap
 		- Young Gen
 			- Eden: Initial object will be created in this space and will shift to S0, S1 if Eden is full.
 			- Survivor 0
 			- Survivor 1
 		- Old Gen
 			- Memory Pool: Stores immutable objects like String. 
-	- Permanent Generation: Holding meta data.
+	- **Permanent Generation:** Holding meta data.
 		- Method Area: holding class or methods strct.	
 		- Run Time Const Pool: static vars, const.
 	
-	- Stack:
+	- **Stack:**
 		- Per thread there will be one stack.
 		- All the local variables or references or method calls will be part of Stack.
 		- Method Block: used to allocate for method execution and will be release once method is done and given to other method.
@@ -23,6 +23,8 @@
 - Major GC: runs for long time hence not invoked frequently.
 - In case of large objects it will be created directly in Heap Old Gen Space.
 - Stack memory is very less compare to Heap Memory.
+
+<img src="images/java/jvm-memory-mgmt.jpg" width="500">
 ---
 
 ## Why Wait and Notify is part of Object Class?

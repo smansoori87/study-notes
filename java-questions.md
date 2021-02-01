@@ -83,8 +83,7 @@ notify() is also called on an object to wake up a thread waiting on the Object's
 - Controllers are made to handle MVC design pattern. and maid to return Views.
 - In case of data, it needs to specify with @ResponseBody explicitly.
 - Where @RestController is the default annotated with @Controller and @ResponseBody and default capable to handle the text response.
---
--
+---
 
 ### Microservices Factors/Principles
 - ***CodeBase:*** an app should be tracked in a single code repository and must not share that repository with any other apps.
@@ -113,9 +112,9 @@ notify() is also called on an object to wake up a thread waiting on the Object's
 - ***L***iskov Substitutional
 - ***I***nterface Segregation
 - ***D***ependency Inversion
-
+---
 - ***DRY*** Do Not Repeat Yourself, Ex: Rest Template
+---
 - ***KISS*** Keep It Simple, Stupid: Keep code modular and simplet to understand or read.
-
 ---
 

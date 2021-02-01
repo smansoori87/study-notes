@@ -86,15 +86,18 @@ notify() is also called on an object to wake up a thread waiting on the Object's
 ---
 
 ### Microservices Factors/Principles
-- ***CodeBase:*** an app should be tracked in a single code repository and must not share that repository with any other apps.
-- ***Dependencies:*** twelve-factor app should always explicitly declare all its dependencies
-- ***Configuration:*** app should externalize all such configurations that vary between deployments. 
+- ***Admin Segregation***
 - ***Backing Services:*** app should treat all such backing services as attached resources. Ex: JPA
 - ***Build Release Run:*** There should be isolation between dev and build and deployment.
+- ***CodeBase:*** an app should be tracked in a single code repository and must not share that repository with any other apps.
+- ***Concurrency:*** Service should not have instance dependencies. So in case of scaling app should be able to distribute load among.
+- ***Configuration:*** app should externalize all such configurations that vary between deployments.
+- ***Dependencies:*** twelve-factor app should always explicitly declare all its dependencies
+- ***Dev/Prod Party:*** gap between development and production environment as minimal as possible.
+- ***Disposableity:*** 
 - ***Keep Stateless:*** App should be independent from session context.
 - ***Self Container:*** Ms is enabled with its own container and can run in any system with compatible JRE version.
-- ***Concurrency:*** Service should not have instance dependencies. So in case of scaling app should be able to distribute load among.
-- ***Dev/Prod Party:*** gap between development and production environment as minimal as possible.
+
 - ***Logs:*** app separates itself from log generation and its processing.
 ---
 - ***I***nterface Segregation

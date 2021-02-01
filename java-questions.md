@@ -116,3 +116,11 @@ notify() is also called on an object to wake up a thread waiting on the Object's
 ---
 - ***KISS*** Keep It Simple, Stupid: Keep code modular and simplet to understand or read.
 ---
+
+### Char array over String to save password?
+- To prevent by mistake logging or printing password readability.
+- Char array can be written with new data in same reference. so security from orphan strings in memory.
+- Strings are immutable and can't be changed, so making any changes will create new object where old one will remain in memory until not garbage collected.
+---
+
+###

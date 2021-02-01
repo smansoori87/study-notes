@@ -96,17 +96,16 @@ notify() is also called on an object to wake up a thread waiting on the Object's
 - ***Concurrency:*** Service should not have instance dependencies. So in case of scaling app should be able to distribute load among.
 - ***Dev/Prod Party:*** gap between development and production environment as minimal as possible.
 - ***Logs:*** app separates itself from log generation and its processing.
-
-### System Design Principles:
-#### Microservices
+---
 - ***I***nterface Segregation
 - ***D***eployability
 - ***E***vent Driven
 - ***A***vailablity over consistency
 - ***L***oose coupling
 - ***S***ingle Responsibility
+---
 
-#### Design Principles
+### System Design Principles:
 - ***S***ingle Responsibility
 - ***O***pen Close
 - ***L***iskov Substitutional
@@ -117,4 +116,3 @@ notify() is also called on an object to wake up a thread waiting on the Object's
 ---
 - ***KISS*** Keep It Simple, Stupid: Keep code modular and simplet to understand or read.
 ---
-

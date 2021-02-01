@@ -1,4 +1,4 @@
-## Memory Architecture in Java:
+### Memory Architecture in Java:
 - **Partitions**
 	- **Heap:** holding all the objects. All JRE classes and objects will be in Heap
 		- Young Gen
@@ -28,7 +28,7 @@
 
 ---
 
-## Why Wait and Notify is part of Object Class?
+### Why Wait and Notify is part of Object Class?
 - wait - wait method tells the current thread to give up monitor(Key) and go to sleep.
 - notify - Wakes up a single thread that is waiting on this object's monitor. 
 - ***So you see wait() and notify() methods work at the monitor(Key) level, thread which is currently holding the monitor is asked 
@@ -40,7 +40,7 @@ notify() is also called on an object to wake up a thread waiting on the Object's
 
 ---
 
-## How to prevent Deadlock in multi-threading ?
+### How to prevent Deadlock in multi-threading ?
 - ***Avoid Unnecessary Locks:*** We should use locks only for those members on which it is required. Unnecessary use of locks leads to a deadlock situation. We recommend you to use a lock-free data structure. If possible, keep your code free form locks. For example, instead of using synchronized ArrayList use the ConcurrentLinkedQueue.
 - ***Avoid Nested Locks:*** Another way to avoid deadlock is to avoid giving a lock to multiple threads if we have already provided a lock to one thread. Since we must avoid allocating a lock to multiple threads.
 - ***Using Thread.join() Method:*** You can get a deadlock if two threads are waiting for each other to finish indefinitely using thread join. If your thread has to wait for another thread to finish, it's always best to use join with the maximum time you want to wait for the thread to finish.
@@ -49,19 +49,19 @@ notify() is also called on an object to wake up a thread waiting on the Object's
 
 ---
 
-## Chain of Responsibility Design:
+### Chain of Responsibility Design:
 - Chain of responsibility pattern is used to achieve loose coupling in software design where a request from the client is passed to a chain of objects to process them. Later, the object in the chain will decide themselves who will be processing the request and whether the request is required to be sent to the next object in the chain or not.
 - An example: Filters in web application arranged in chain and each filter takes the decision wheather request needs to pass to the next or not...
 
 ---
 
-## Difference between Request Redirect and Forward
+### Difference between Request Redirect and Forward
 - Forward will pass the same request to the different resource and URL will remain same at client end.
 - Where Request Redirect or SendRedirect will built a new request and fwd to resource from client end. and hence due to dual round trip it is slower than forward.
 
 --- 
 
-## What is Mutation Testing?
+### What is Mutation Testing?
 - code coverage metrics can sometimes be quite ineffective, because a 100% code coverage score only means that all lines were exercised at least once, but it says nothing about tests accuracy or use-cases completeness, and that's why mutation testing actually matters.
 - Mutation testing is a testing technique used to improve the adequacy of tests and identify defects in code. 
 - ***The idea is to change the production code dynamically and cause the tests to fail.***
@@ -71,7 +71,7 @@ notify() is also called on an object to wake up a thread waiting on the Object's
 - https://www.baeldung.com/java-mutation-testing-with-pitest 
 ---
 
-## Performance Testing
+### Performance Testing
 - Tools like Chaos Monkey using Jmeter for local performance testing. and load runner for a load testing signoff.
 - ***Latency Assault:*** adds random latency to the request
 - ***Exception Assault:*** throws random Runtime Exception
@@ -79,10 +79,43 @@ notify() is also called on an object to wake up a thread waiting on the Object's
 - https://www.baeldung.com/spring-boot-chaos-monkey
 ---
 
-## Difference between RestController and Controller
+### Difference between RestController and Controller
 - Controllers are made to handle MVC design pattern. and maid to return Views.
 - In case of data, it needs to specify with @ResponseBody explicitly.
 - Where @RestController is the default annotated with @Controller and @ResponseBody and default capable to handle the text response.
+--
+-
+
+### Microservices Factors/Principles
+- ***CodeBase:*** an app should be tracked in a single code repository and must not share that repository with any other apps.
+- ***Dependencies:*** twelve-factor app should always explicitly declare all its dependencies
+- ***Configuration:*** app should externalize all such configurations that vary between deployments. 
+- ***Backing Services:*** app should treat all such backing services as attached resources. Ex: JPA
+- ***Build Release Run:*** There should be isolation between dev and build and deployment.
+- ***Keep Stateless:*** App should be independent from session context.
+- ***Self Container:*** Ms is enabled with its own container and can run in any system with compatible JRE version.
+- ***Concurrency:*** Service should not have instance dependencies. So in case of scaling app should be able to distribute load among.
+- ***Dev/Prod Party:*** gap between development and production environment as minimal as possible.
+- ***Logs:*** app separates itself from log generation and its processing.
+
+### System Design Principles:
+#### Microservices
+- ***I***nterface Segregation
+- ***D***eployability
+- ***E***vent Driven
+- ***A***vailablity over consistency
+- ***L***oose coupling
+- ***S***ingle Responsibility
+
+#### Design Principles
+- ***S***ingle Responsibility
+- ***O***pen Close
+- ***L***iskov Substitutional
+- ***I***nterface Segregation
+- ***D***ependency Inversion
+
+- ***DRY*** Do Not Repeat Yourself, Ex: Rest Template
+- ***KISS*** Keep It Simple, Stupid: Keep code modular and simplet to understand or read.
+
 ---
 
-##

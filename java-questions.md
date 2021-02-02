@@ -97,7 +97,6 @@ notify() is also called on an object to wake up a thread waiting on the Object's
 - ***Disposableity:*** 
 - ***Keep Stateless:*** App should be independent from session context.
 - ***Self Container:*** Ms is enabled with its own container and can run in any system with compatible JRE version.
-
 - ***Logs:*** app separates itself from log generation and its processing.
 ---
 - ***I***nterface Segregation

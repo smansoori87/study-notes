@@ -258,6 +258,7 @@ try {
 ```
 
 # Different types of Lock in Java
+- https://www.youtube.com/watch?v=KXDMmr4JzVM
 1. ReentrantLock
 2. ReadWriteLock
 3. StampedLock

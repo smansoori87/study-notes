@@ -62,16 +62,18 @@ public DataSource dataSource() {
 	- Use @EnableTransactionManagement in main class.
 	- Use @Transacctional at Method or at Bean level.
 	- There are multiple properties like rollbackFor, noRollbackFor, Isolation, Propagation, readOnly available.
-	- PROPAGATION: https://www.youtube.com/watch?v=zVRO-LELoSw
+	- ***PROPAGATION:*** https://www.youtube.com/watch?v=zVRO-LELoSw
 		- REQUIRED: Outer and Inner Transaction will run in same physical txn. if Inner fail, outer will also fail and rollbacked.
 		- REQUIRED_NEW: Outer and Inner will be independent and run in 2 different physical txn. Inner fail will not affect the outer one.
 		- SUPPORT: If Outer method in transaction, inner will support in same txn. If Outer not in txn, Inner will also run without txn.
 		- NOT_SUPPORTED: In case if outer in txn or not in txn, inner will not be part of any txn.
 		- NEVER: Never run in txn. even if outer in txn,  inner will throw exceptoin.
 		- MANDATORY: Inner always needs to call from txn. if Outer not in txn, inner will throw an exception.
-	- ISOLATION: 
+		
+	- ***ISOLATION/ Pessimistic Locking:*** DB will take care the locks while read and write based on isolation level. 
 		- https://www.javainuse.com/spring/boot-transaction-isolation
 		- https://retool.com/blog/isolation-levels-and-locking-in-relational-databases/
+		- https://www.youtube.com/watch?v=R-iX1r_7UY0
 		- SERIALIZABLE: At a time only one txn will take in place.
 			- **uses range locks to avoid phantom reads. Range locks are a mechanism that’s in between locking a row and locking a table**
 		- REPEATABLE_READ: 2 txn can run in parallel, where first txn will lock the table and second can't modify same records. but can insert new records.
@@ -83,7 +85,9 @@ public DataSource dataSource() {
 			
 		- DIRTY_READS: If A and B in txn. A did some changes and before commit B read through records. later A rollbacked the changes due to failure or other reason. so overall it show wrong value with B.
 		- NON_REPEATABLE_READ: A read throw in txn, and B wrote before A commit the changes. So A will be different in case of 2 read.
-		- Phantom: 	A and B in txn. A read through few records, B wrote new records bf A commit. A further reads then there is gap. 
+		- Phantom: 	A and B in txn. A read through few records, B wrote new records bf A commit. A further reads then there is gap.
+
+	- ***Optimistic Lock:*** Client will manage the record read and write using version/timeStamp with nolock. 
 
 ```java
 > @Entity

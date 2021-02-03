@@ -125,4 +125,16 @@ notify() is also called on an object to wake up a thread waiting on the Object's
 - Strings are immutable and can't be changed, so making any changes will create new object where old one will remain in memory until not garbage collected.
 ---
 
-###
+### Memory Leakage in Java
+- GC runs to collect all the non referenced objects from Heap. While if there are un-referenced objects available in Heap and GC is unable to collect the same which leads the Memory leakage.
+- There can be multiple reasons as fe of them highlighted below.
+- 1. ***Static Data Members:*** As static data members are part of PermGgen(MethodArea) are not eligible for GC. 
+- 2. ***Through Unclosed Resources:*** Use resources with "try with resources" or with try and finally to make sure them to close.
+- 3. ***Improper equals() and hashCode() :*** In case of using Hashmap or Hibernate caching, and hashcode-equals not implemented correctly there may be mulitple same objects be added in cache. 
+- 4. ***Finalize():*** using finalize will stop GC to collect object immediately.
+- 5. ***Non static Inner classes:*** even after our containing class' object goes out of scope, it will not be garbage collected.
+- 6. ***ThreadLocal:*** in webserver its not everytime new thread is created, and if anything set in thread-local and not removed explicitly it will remain part of Thread even request is completed.
+---
+
+### 
+

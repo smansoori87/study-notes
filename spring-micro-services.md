@@ -425,3 +425,14 @@ https://medium.com/@aksudupa11/getting-started-with-hystrix-e454158f2867
 
 - How to supply parameters in Fallback API
 https://stackoverflow.com/questions/52382160/how-to-pass-data-from-business-method-to-fallback-method-while-using-spring-boot
+
+
+## Spring Boot + Resilience 4J Integration
+```xml
+<dependency>
+    <groupId>io.github.resilience4j</groupId>
+    <artifactId>resilience4j-circuitbreaker</artifactId>
+    <version>1.7.0</version>
+</dependency>
+```
+- https://www.youtube.com/watch?v=WL0eIKD8krU

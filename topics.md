@@ -82,5 +82,8 @@
  
 - Spring Security Oauth
 	- Authentication
-	- Authrisation
+	- Authrization
 	- JWT
+	- SSL
+	- KeyStore
+	- TrustStore

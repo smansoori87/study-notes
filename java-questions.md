@@ -138,13 +138,14 @@ notify() is also called on an object to wake up a thread waiting on the Object's
 
 ### Bean @PostConstruct and @PreDestroy with Prototype scope
 - Spring will call, @PostConstruct method and then handing it over to the client. Spring is not managing the bean after that and in this case, the client has to perform all the resource cleanup by directly calling the PreDestroy method.
-
+---
 ### Differences between @Component, @Repository, @Controller and @Service
+```
 - First point worth highlighting again is that with respect to scan-auto-detection and dependency injection for BeanDefinition all these annotations (viz., @Component, @Service, @Repository, @Controller) are the same. We can use one in place of another and can still get our way around.
 
 - This is a general-purpose stereotype annotation indicating that the class is a spring component.
 
-- What’s special about @Component
+- What's special about @Component
 ```xml
 <context:component-scan> only scans @Component and does not look for @Controller, @Service and @Repository in general. They are scanned because they themselves are annotated with @Component.
 ```
@@ -168,7 +169,7 @@ public @interface Controller {
 }
 ```
 
-- Thus, it’s not wrong to say that @Controller, @Service and @Repository are special types of @Component annotation. <context:component-scan> picks them up and registers their following classes as beans, just as if they were annotated with @Component.
+- Thus, it's not wrong to say that @Controller, @Service and @Repository are special types of @Component annotation. <context:component-scan> picks them up and registers their following classes as beans, just as if they were annotated with @Component.
 - Special type annotations are also scanned, because they themselves are annotated with @Component annotation, which means they are also @Components. If we define our own custom annotation and annotate it with @Component, it will also get scanned with <context:component-scan>
 ```java
 @Repository
@@ -176,15 +177,15 @@ public @interface Controller {
 This is to indicate that the class defines a data repository.
 
 ```
-What’s special about @Repository?
+What's special about @Repository?
 ```
 
-- In addition to pointing out, that this is an Annotation based Configuration, @Repository’s job is to catch platform specific exceptions and re-throw them as one of Spring’s unified unchecked exception. For this, we’re provided with PersistenceExceptionTranslationPostProcessor, that we are required to add in our Spring’s application context like this:
+- In addition to pointing out, that this is an Annotation based Configuration, @Repository's job is to catch platform specific exceptions and re-throw them as one of Spring's unified unchecked exception. For this, we're provided with PersistenceExceptionTranslationPostProcessor, that we are required to add in our Spring's application context like this:
 
 ```xml
 <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 ```
-- This bean post processor adds an advisor to any bean that’s annotated with @Repository so that any platform-specific exceptions are caught and then re-thrown as one of Spring’s unchecked data access exceptions.
+- This bean post processor adds an advisor to any bean that's annotated with @Repository so that any platform-specific exceptions are caught and then re-thrown as one of Spring's unchecked data access exceptions.
 
 ```java
 @Controller
@@ -192,7 +193,7 @@ What’s special about @Repository?
 - The @Controller annotation indicates that a particular class serves the role of a controller. The @Controller annotation acts as a stereotype for the annotated class, indicating its role.
 
 ```
-What’s special about @Controller?
+What's special about @Controller?
 ```
 - We cannot switch this annotation with any other like @Service or @Repository, even though they look same. The dispatcher scans the classes annotated with @Controller and detects methods annotated with @RequestMapping annotations within them. We can use @RequestMapping on/in only those methods whose classes are annotated with @Controller and it will NOT work with @Component, @Service, @Repository etc...
 
@@ -206,13 +207,13 @@ What’s special about @Controller?
 @Service beans hold the business logic and call methods in the repository layer.
 ```
 ```
-What’s special about @Service?
+What's special about @Service?
 ```
-- Apart from the fact that it's used to indicate, that it's holding the business logic, there’s nothing else noticeable in this annotation; but who knows, Spring may add some additional exceptional in future.
+- Apart from the fact that it's used to indicate, that it's holding the business logic, there's nothing else noticeable in this annotation; but who knows, Spring may add some additional exceptional in future.
 
 ```
 What else?
 ```
 - Similar to above, in the future Spring may add special functionalities for @Service, @Controller and @Repository based on their layering conventions. Hence, it's always a good idea to respect the convention and use it in line with layers.
- 
+``` 
 

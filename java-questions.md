@@ -140,7 +140,6 @@ notify() is also called on an object to wake up a thread waiting on the Object's
 - Spring will call, @PostConstruct method and then handing it over to the client. Spring is not managing the bean after that and in this case, the client has to perform all the resource cleanup by directly calling the PreDestroy method.
 ---
 ### Differences between @Component, @Repository, @Controller and @Service
-```
 - First point worth highlighting again is that with respect to scan-auto-detection and dependency injection for BeanDefinition all these annotations (viz., @Component, @Service, @Repository, @Controller) are the same. We can use one in place of another and can still get our way around.
 
 - This is a general-purpose stereotype annotation indicating that the class is a spring component.
@@ -215,5 +214,5 @@ What's special about @Service?
 What else?
 ```
 - Similar to above, in the future Spring may add special functionalities for @Service, @Controller and @Repository based on their layering conventions. Hence, it's always a good idea to respect the convention and use it in line with layers.
-``` 
 
+---

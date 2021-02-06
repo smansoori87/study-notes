@@ -152,19 +152,19 @@ notify() is also called on an object to wake up a thread waiting on the Object's
 ```java
 @Component
 public @interface Service {
-    ….
+    ...
 }
  
 
 @Component
 public @interface Repository {
-    ….
+    ...
 }
  
 
 @Component
 public @interface Controller {
-    …
+	...
 }
 ```
 

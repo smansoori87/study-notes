@@ -135,3 +135,6 @@ public void listenGroupFoo(String message) {
 	- https://www.baeldung.com/spring-kafka 
 	- Producer: https://www.youtube.com/watch?v=NjHYWEV_E_o
 	- Consumer: https://www.youtube.com/watch?v=IncG0_XSSBg
+
+## How to re process failed messages
+- https://stackoverflow.com/questions/47427948/how-to-acknowledge-current-offset-in-spring-kafka-for-manual-commit

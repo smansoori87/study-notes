@@ -5,6 +5,8 @@
  
 - 	![spring-life](images/spring/bean-life-cycle.JPG)
 
+- 	![spring-life](images/spring/spring-bean-life-cycle-tutorial.jpg)
+
 
 - @Configuration: To define any class as config class in spring to create beans and register them in container.
 - @Import: In case of multiple config classes to merge all of them in single context can be used one of the configg class with Import.

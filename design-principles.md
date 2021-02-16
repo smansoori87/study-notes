@@ -53,6 +53,21 @@ https://www.youtube.com/watch?v=Z_ySH41NmUQ
 - Spring uses IOC to inject the dependency on modules.
 
 --
+# Creational Design Pattern
+## Singleton
+- Single object/JVM.
+
+## Prototype
+- Same data with multiple objects on getObjects. Each call of getObject will return new object with default data.
+
+## Factory
+- Key Value map of of Key and Objects.
+
+## Abstracct Factory
+- Factory of factories. Abstract Factory of Bank and Loan Factory.
+
+## Builder
+- Immutability, and flixibility with setters.
 
 # Behavioral Design Patterns
 
@@ -69,6 +84,7 @@ Ex: In web applications, Service layer is build on interfaces and integrated wit
 - While updating state of object and want to update all the dependent objects, This is suitable fit for such requirement.
 
 > Ex:
+- Publisher/Consumer Design
 - WeatherStation application
 - One good example is Angular State and Observable Store. Any changes in store will give signal to update all the dependent objects.
 
@@ -105,18 +121,17 @@ public abstract class Algo{
  }
 } 
 
-## Null Object Pattern
-- design to validate null objects.
-
-## Visitor Pattern
-- Design pattern to isolate the data model with business components.
-
+## Chain Of Responsibilty
+- Filters
 
 # Structural Design Pattern:
-## Proxy Pattern
-- Hide the main entity from the outside world.
-- Ex: API Gateway
-> https://www.javatpoint.com/proxy-pattern
+## Adapter
+- Creating adaptor between service and repo layer.
+
+## Composite Design
+- Where there is a tree structure kind of format need to build and all nodes representing some common structure.
+- Ex: An example a Transaction History, were there will be N number of different transactions but all are part of Root Transaction, and holding common behaviours like amount, shop person, trans id.
+-https://www.youtube.com/watch?v=Q1jZ4TI6MF4
 
 ## Decorator Pattern
 - if there is need to provide the additional behaviour on top of vanilla impl of any interface.
@@ -127,12 +142,18 @@ public abstract class Algo{
 > Additional behavior will be like service fees or charges on top of actual fund transfer. 
 > https://www.javatpoint.com/decorator-pattern
 
-## Composite Design
-- Where there is a tree structure kind of format need to build and all nodes representing some common structure.
-- Ex: An example a Transaction History, were there will be N number of different transactions but all are part of Root Transaction, and holding common behaviours like amount, shop person, trans id.
--https://www.youtube.com/watch?v=Q1jZ4TI6MF4
+## Facade
+- Service layer with multiple bussiness logic with one method exposed out to hide the complexity of internals.
 
-## 
+## Flyweight
+- ConnectionPool
+- to reuse already existing similar kind of objects by storing them and create new object when no matching object is found
+
+## Proxy Pattern
+- Hide the main entity from the outside world.
+- Ex: API Gateway
+> https://www.javatpoint.com/proxy-pattern
+ 
 
 --
 # ACID:

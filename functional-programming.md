@@ -8,7 +8,7 @@
 https://github.com/in28minutes/functional-programming-with-java
 
 ### Java Brains:
-https://www.youtube.com/watch?v=gpIUfj3KaOc&list=PLqq-6Pq4lTTa9YGfyhyW2CqdtW9RtY-I3
+- https://www.youtube.com/watch?v=gpIUfj3KaOc&list=PLqq-6Pq4lTTa9YGfyhyW2CqdtW9RtY-I3
 
 ## Functional Interface
 - Interface with only one method declaration in it.
@@ -19,6 +19,7 @@ public interface Comparable<T> {
 }
 ```
 ## Lambda
+- https://www.baeldung.com/java-lambda-effectively-final-local-variables
 - Any method which is taking Functional interface as input can be supplied with Lambda Expressions.
 - Lambda in other words are mainly to supply the behaviour.
 - internally Lambda are similar to anonymous inner classes.
@@ -67,8 +68,9 @@ public int getSum(int a, int b){
 > Terminal Operation: Only one terminal operation is allowed.
 - count, max, min, reduce
 
-> Stream Examples
-https://www.youtube.com/watch?v=t1-YZ6bF-g0
+### Stream Examples
+- https://www.youtube.com/watch?v=t1-YZ6bF-g0\
+- https://stackify.com/streams-guide-java-8/
 
 ![Stream](images/functional-programming/stream-1.JPG)
 

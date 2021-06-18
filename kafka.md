@@ -6,6 +6,8 @@
 > Series
 - https://www.youtube.com/watch?v=qu96DFXtbG4
 
+- https://stackoverflow.com/questions/17008947/whats-the-difference-between-spring-datas-mongotemplate-and-mongorepository
+
 > All Theory About
 - https://medium.com/@durgaswaroop/a-practical-introduction-to-kafka-storage-internals-d5b544f6925f#:~:text=A%20segment%20is%20simply%20a,them%20into%20chunks%20called%20segments.
 
